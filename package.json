@@ -121,6 +121,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "tiny-cookie": "^2.1.1"
+    "tiny-cookie": "^2.1.1",
+    "vuetify": "^1.0.18"
   }
 }
