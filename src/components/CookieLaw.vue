@@ -191,6 +191,10 @@
     }
   }
 }
+.Cookie__buttons > div:nth-child(4) > button {
+    margin: 0;
+}
+
 .Cookie__button {
   cursor: pointer;
   align-self: center;
