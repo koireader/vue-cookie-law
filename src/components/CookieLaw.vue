@@ -8,9 +8,9 @@
       </v-layout>
       <div class="Cookie_checkbox">
         <v-layout row class="Cookie__buttons">
-          <v-flex xs1><v-checkbox disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
-          <v-flex xs1 class="mx-auto"><v-checkbox label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
-          <v-flex xs1><v-checkbox label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
+          <v-flex xs1><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
+          <v-flex xs1><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
+          <v-flex xs1><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
           <v-flex class="text-xs-right">
             <!-- <a :target="target" :href="buttonLink" v-if="externalButtonLink" :class="buttonClass">{{ buttonLinkText }}</a>
             <router-link :to="buttonLink" v-if="internalButtonLink" :class="buttonClass">{{ buttonLinkText }}</router-link> -->
@@ -116,22 +116,22 @@
       }
     },
     methods: {
-      setVisited () {
+      setVisited (data) {
         if (this.supportsLocalStorage) {
-          localStorage.setItem('cookie:accepted', true)
+          localStorage.setItem('cookie:accepted', JSON.stringify(data))
         } else {
-          Cookie.set('cookie:accepted', true)
+          Cookie.set('cookie:accepted', JSON.stringify(data))
         }
       },
       getVisited () {
         if (this.supportsLocalStorage) {
-          return localStorage.getItem('cookie:accepted')
+          return JSON.parse(localStorage.getItem('cookie:accepted'))
         } else {
-          return Cookie.get('cookie:accepted')
+          return JSON.parse(Cookie.get('cookie:accepted'))
         }
       },
       accept () {
-        this.setVisited()
+        this.setVisited(this.selected)
         this.isOpen = false
         this.$emit('accept', this.selected)
       }
@@ -218,7 +218,7 @@
     color: $fontColor;
     padding: 1.25em;
     .Cookie__button {
-      background: $buttonBackgroundColor;
+      background: $buttonBackgroundColor !important;
       padding: 0 3.125em;
       color: $buttonFontColor;
       border-radius: $buttonRadius;
