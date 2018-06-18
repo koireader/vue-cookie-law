@@ -8,22 +8,71 @@
       </v-layout>
       <div class="Cookie_checkbox">
         <v-layout row class="Cookie__buttons">
+          <!-- <div style="border-bottom: 1px solid white; height: 10px; position: absolute; top: 93px; width: 100%;"></div> -->
           <v-flex xs1><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
           <v-flex xs1><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
-          <v-flex xs1><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
+          <v-flex xs1 class="mr-0"><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
+          <v-flex xs1 class="ml-0"><v-btn flat small @click.stop="showMore = !showMore" class="ma-0">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
           <v-flex class="text-xs-right">
-            <!-- <a :target="target" :href="buttonLink" v-if="externalButtonLink" :class="buttonClass">{{ buttonLinkText }}</a>
-            <router-link :to="buttonLink" v-if="internalButtonLink" :class="buttonClass">{{ buttonLinkText }}</router-link> -->
-            <v-btn depressed :class="buttonClass" @click="accept">{{ buttonText }}</v-btn>        
+            <v-btn depressed :class="buttonClass" @click="accept" class="ma-0">{{ buttonText }}</v-btn>        
           </v-flex>
         </v-layout>
       </div>
+        <v-layout row v-if="showMore" class="Cookie-show-more px-3">
+          <v-flex class="px-3">
+            <v-tabs class="Cookie-tab" v-model="showMoreTab" dark>
+              <v-tab key="0" ripple>
+                Cookie Declaration
+              </v-tab>
+              <v-tab key="1" ripple>
+                About Cookie
+              </v-tab>
+              <v-tab-item key="0">
+                <v-card flat class="d-flex">
+                  <v-flex xs1>
+                    <v-list dense class="pt-0" >
+                      <v-list-tile v-for="item in items" :key="item" @click="cookieTab(item)" ripple>
+                        <v-list-tile-content>
+                          <v-list-tile-title>{{ item }}</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                    </v-list>
+                  </v-flex>
+                  <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Necessary'">
+                    These cookies are necessary for the Website to function and cannot be turned off in our systems. They are usually only set in response to actions made by you which amount to a request for information or services, such as logging in or filling in forms on our Website. You can set your browser to block or alert you about these cookies, but some parts of the Website will not then work. These cookies do not store any personally identifiable information.
+                  </v-flex>
+                  <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Statistics'">
+                    These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other websites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+                  </v-flex>
+                  <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Others'">
+                    Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies.
+                  </v-flex>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item key="1">
+                <v-card flat>
+                  <v-card-text class="text-xs-left caption pt-0">Cookies are small text files that can be used by websites to make a user's experience more efficient.
+
+                  The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission.
+
+                  This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages.
+
+                  You can at any time change or withdraw your consent from the Cookie Declaration on our website.
+
+                  Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.</v-card-text>
+                </v-card>
+              </v-tab-item>
+            </v-tabs>
+          </v-flex>
+        </v-layout>
     </div>
   </transition>
 </template>
 
 <script>
   import * as Cookie from 'tiny-cookie'
+  // import '@mdi/font/css/materialdesignicons.min.css'
+
   export default {
     props: {
       buttonText: {
@@ -79,7 +128,12 @@
       return {
         supportsLocalStorage: true,
         isOpen: false,
-        selected: ['Necessary']
+        selected: ['Necessary'],
+        showMore: true,
+        showMoreTab: 0,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        items: ['Necessary', 'Statistics', 'Others'],
+        cookieTabClicked: 'Necessary'
       }
     },
     computed: {
@@ -134,6 +188,10 @@
         this.setVisited(this.selected)
         this.isOpen = false
         this.$emit('accept', this.selected)
+      },
+      cookieTab (item) {
+        console.log(item)
+        this.cookieTabClicked = item
       }
     }
   }
@@ -192,7 +250,7 @@
   }
 }
 .Cookie__buttons > div:nth-child(4) > button {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .Cookie__button {
@@ -207,6 +265,15 @@
   padding: 20px 0;
   // justify-content: space-between;
   align-items: baseline;
+}
+
+.Cookie-tab a {
+  font-size: 12px !important;
+}
+
+.Cookie-show-more {
+    position: relative;
+    bottom: 10px;
 }
 
 @mixin generateTheme(

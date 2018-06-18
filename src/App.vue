@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      theme: 'base'
+      theme: 'blood-orange'
     }
   }
 }
