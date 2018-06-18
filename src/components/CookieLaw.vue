@@ -12,7 +12,7 @@
           <v-flex xs1><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
           <v-flex xs1><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
           <v-flex xs1 class="mr-0"><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
-          <v-flex xs1 class="ml-0"><v-btn flat small @click.stop="showMore = !showMore" class="ma-0">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
+          <v-flex xs1 class="ml-0"><v-btn depressed small @click.stop="showMore = !showMore" class="ma-0">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
           <v-flex class="text-xs-right">
             <v-btn depressed :class="buttonClass" @click="accept" class="ma-0">{{ buttonText }}</v-btn>        
           </v-flex>
@@ -21,45 +21,81 @@
         <v-layout row v-if="showMore" class="Cookie-show-more px-3">
           <v-flex class="px-3">
             <v-tabs class="Cookie-tab" v-model="showMoreTab" dark>
-              <v-tab key="0" ripple>
-                Cookie Declaration
+              <v-tab active-class="Cookie-active-tab" key="0" ripple>
+                <strong>Cookie Declaration</strong>
               </v-tab>
-              <v-tab key="1" ripple>
-                About Cookie
+              <v-tab active-class="Cookie-active-tab" key="1" ripple>
+                <strong>About Cookie</strong>
               </v-tab>
               <v-tab-item key="0">
                 <v-card flat class="d-flex">
                   <v-flex xs1>
                     <v-list dense class="pt-0" >
-                      <v-list-tile v-for="item in items" :key="item" @click="cookieTab(item)" ripple>
-                        <v-list-tile-content>
-                          <v-list-tile-title>{{ item }}</v-list-tile-title>
-                        </v-list-tile-content>
-                      </v-list-tile>
+                      <v-list-tile v-bind:class="{'Cookie-active-tab': (cookieTabClicked === item)}" v-for="item in cookieDecalration" :key="item" @click="cookieTab(item)" ripple> {{ item }} </v-list-tile>
                     </v-list>
                   </v-flex>
                   <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Necessary'">
                     These cookies are necessary for the Website to function and cannot be turned off in our systems. They are usually only set in response to actions made by you which amount to a request for information or services, such as logging in or filling in forms on our Website. You can set your browser to block or alert you about these cookies, but some parts of the Website will not then work. These cookies do not store any personally identifiable information.
+                    <div class="py-2"></div>
+                    <v-data-table hide-actions :headers="headers" :items="cookieLicenceJson.Necessary" class="elevation-5">
+                      <template slot="items" slot-scope="props">
+                        <!-- <td>{{ props.item.name }}</td> -->
+                        <td>{{ props.item.Name }}</td>
+                        <td>{{ props.item.Provider }}</td>
+                        <td>{{ props.item.Purpose }}</td>
+                        <td>{{ props.item.Expiry }}</td>
+                        <td>{{ props.item.Type }}</td>
+                      </template>
+                    </v-data-table>
+
                   </v-flex>
                   <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Statistics'">
-                    These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other websites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+                    <p>
+                      These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other websites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+                    </p>
+
+                    <div class="py-2"></div>
+                    <v-data-table hide-actions :headers="headers" :items="cookieLicenceJson.Statistics" class="elevation-5">
+                      <template slot="items" slot-scope="props">
+                        <!-- <td>{{ props.item.name }}</td> -->
+                        <td>{{ props.item.Name }}</td>
+                        <td>{{ props.item.Provider }}</td>
+                        <td>{{ props.item.Purpose }}</td>
+                        <td>{{ props.item.Expiry }}</td>
+                        <td>{{ props.item.Type }}</td>
+                      </template>
+                    </v-data-table>
                   </v-flex>
                   <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Others'">
-                    Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies.
+                    <p>
+                      Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies.
+                    </p>
+
+                    <div class="py-2"></div>
+                    <v-data-table  hide-actions :headers="headers" :items="cookieLicenceJson.Unclassified" class="elevation-5">
+                      <template slot="items" slot-scope="props">
+                        <!-- <td>{{ props.item.name }}</td> -->
+                        <td>{{ props.item.Name }}</td>
+                        <td>{{ props.item.Provider }}</td>
+                        <td>{{ props.item.Purpose }}</td>
+                        <td>{{ props.item.Expiry }}</td>
+                        <td>{{ props.item.Type }}</td>
+                      </template>
+                    </v-data-table>
                   </v-flex>
                 </v-card>
               </v-tab-item>
               <v-tab-item key="1">
                 <v-card flat>
-                  <v-card-text class="text-xs-left caption pt-0">Cookies are small text files that can be used by websites to make a user's experience more efficient.
-
-                  The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission.
-
-                  This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages.
-
-                  You can at any time change or withdraw your consent from the Cookie Declaration on our website.
-
-                  Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.</v-card-text>
+                  <v-card-text class="text-xs-left caption pt-0">
+                    <v-flex class="py-2">
+                      <p>Cookies are small text files that can be used by websites to make a user's experience more efficient.</p>
+                      <p>The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission.</p>
+                      <p>This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages.</p>
+                      <p>You can at any time change or withdraw your consent from the Cookie Declaration on our website.</p>
+                      <p>Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.</p>
+                    </v-flex>
+                  </v-card-text>
                 </v-card>
               </v-tab-item>
             </v-tabs>
@@ -71,6 +107,7 @@
 
 <script>
   import * as Cookie from 'tiny-cookie'
+  import json from '../holler-tag-cookie-licence.json'
   // import '@mdi/font/css/materialdesignicons.min.css'
 
   export default {
@@ -132,9 +169,22 @@
         showMore: true,
         showMoreTab: 0,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        items: ['Necessary', 'Statistics', 'Others'],
-        cookieTabClicked: 'Necessary'
+        cookieDecalration: ['Necessary', 'Statistics', 'Others'],
+        cookieTabClicked: 'Necessary',
+        cookieLicenceJson: json,
+        headers: [
+          { text: 'Name', value: 'name' },
+          { text: 'Provider', value: 'provider' },
+          { text: 'Purpose', value: 'purpose' },
+          { text: 'Expiry', value: 'expiry' },
+          { text: 'Type', value: 'type' }
+          ],
+
       }
+    },
+    mounted() {
+      console.log('mounted')
+      console.log(this.cookieLicenceJson)
     },
     computed: {
       containerPosition () {
@@ -269,11 +319,22 @@
 
 .Cookie-tab a {
   font-size: 12px !important;
+  height: 40px;
 }
 
 .Cookie-show-more {
     position: relative;
     bottom: 10px;
+}
+
+.Cookie-tab .tabs__items {
+    overflow-y: visible;
+    height: 100px;
+}
+
+.Cookie-active-tab {
+    background-color: rgba(0,0,0,.12) !important;
+    text-shadow: none;
 }
 
 @mixin generateTheme(
