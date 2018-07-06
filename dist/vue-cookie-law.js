@@ -2293,7 +2293,7 @@ function convert(opts) {
 /* 82 */
 /***/ (function(module, exports) {
 
-module.exports = {"Necessary":[{"Name":"CookieConsent","Provider":"www.hollertag.com","Purpose":"Stores the user's cookie consent state for the current domain","Expiry":"1 year","Type":"HTTP"}],"Statistics":[{"Name":"_dc_gtm_UA-#","Provider":"www.hollertag.com","Purpose":"Used by Google Tag Manager to control the loading of a Google Analytics script tag.","Expiry":"Session","Type":"HTTP"},{"Name":"_ga","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"2 Years","Type":"HTTP"},{"Name":"_gid","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"Session","Type":"HTTP"},{"Name":"fr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"3 months","Type":"HTTP"},{"Name":"tr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"Session","Type":"Pixel"}],"Unclassified":[],"Flag":[{"Name":"ads/ga-audiences","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors that are likely to convert to customers based on the visitor's online behaviour across websites.","Expiry":"Session","Type":"Pixel"},{"Name":"ads/user-lists/#","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors across the web in ad groups","Expiry":"Session","Type":"Pixel"},{"Name":"NID","Provider":"google.com","Purpose":"Registers a unique ID that identifies a returning user's device. The ID is used for targeted ads.","Expiry":"6 months","Type":"HTTP"}]}
+module.exports = {"Necessary":[{"Name":"CookieConsent","Provider":"www.hollertag.com","Purpose":"Stores the user's cookie consent state for the current domain","Expiry":"1 year","Type":"HTTP"}],"Statistics":[{"Name":"_dc_gtm_UA-#  ","Provider":"www.hollertag.com","Purpose":"Used by Google Tag Manager to control the loading of a Google Analytics script tag.","Expiry":"Session","Type":"HTTP"},{"Name":"_ga","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"2 Years","Type":"HTTP"},{"Name":"_gid","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"Session","Type":"HTTP"},{"Name":"fr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"3 months","Type":"HTTP"},{"Name":"tr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"Session","Type":"Pixel"}],"Unclassified":[],"Flag":[{"Name":"ads/ga-audiences","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors that are likely to convert to customers based on the visitor's online behaviour across websites.","Expiry":"Session","Type":"Pixel"},{"Name":"ads/user-lists/#","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors across the web in ad groups","Expiry":"Session","Type":"Pixel"},{"Name":"NID","Provider":"google.com","Purpose":"Registers a unique ID that identifies a returning user's device. The ID is used for targeted ads.","Expiry":"6 months","Type":"HTTP"}]}
 
 /***/ }),
 /* 83 */
@@ -2405,13 +2405,12 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "v-flex",
-                      { staticClass: "ml-0", attrs: { xs1: "" } },
+                      { staticClass: "mt-3", attrs: { xs1: "" } },
                       [
                         _c(
                           "v-btn",
                           {
-                            staticClass: "ma-0",
-                            attrs: { depressed: "", small: "" },
+                            attrs: { dark: "", flat: "", small: "" },
                             on: {
                               click: function($event) {
                                 $event.stopPropagation()
@@ -2439,7 +2438,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "v-flex",
-                      { staticClass: "text-xs-right" },
+                      { staticClass: "text-xs-right mt-3" },
                       [
                         _c(
                           "v-btn",
@@ -2516,7 +2515,7 @@ var render = function() {
                                   "v-card",
                                   {
                                     staticClass: "d-flex",
-                                    attrs: { flat: "" }
+                                    attrs: { flat: "", dark: "" }
                                   },
                                   [
                                     _c(

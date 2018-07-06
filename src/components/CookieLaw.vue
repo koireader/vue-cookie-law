@@ -12,7 +12,7 @@
           <v-flex xs1><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
           <v-flex xs1><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
           <v-flex xs1 class="mr-0"><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
-          <v-flex xs1 class="mt-3"><v-btn depressed small @click.stop="showMore = !showMore" class="ma-0">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
+          <v-flex xs1 class="mt-3"><v-btn dark flat small @click.stop="showMore = !showMore">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
           <v-flex class="text-xs-right mt-3">
             <v-btn depressed :class="buttonClass" @click="accept" class="ma-0">{{ buttonText }}</v-btn>        
           </v-flex>
@@ -28,7 +28,7 @@
                 <strong>About Cookie</strong>
               </v-tab>
               <v-tab-item key="0">
-                <v-card flat class="d-flex">
+                <v-card flat class="d-flex" dark>
                   <v-flex xs1>
                     <v-list dense class="pt-0" >
                       <v-list-tile v-bind:class="{'Cookie-active-tab': (cookieTabClicked === item)}" v-for="item in cookieDecalration" :key="item" @click="cookieTab(item)" ripple> {{ item }} </v-list-tile>
