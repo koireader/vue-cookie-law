@@ -7,7 +7,7 @@
     "Type": "HTTP"
   }],
   "Statistics": [{
-      "Name": "_dc_gtm_UA-#",
+      "Name": "_dc_gtm_UA-#  ",
       "Provider": "www.hollertag.com",
       "Purpose": "Used by Google Tag Manager to control the loading of a Google Analytics script tag.",
       "Expiry": "Session",

@@ -485,6 +485,10 @@ var _tinyCookie = __webpack_require__(80);
 
 var Cookie = _interopRequireWildcard(_tinyCookie);
 
+var _hollerTagCookieLicence = __webpack_require__(82);
+
+var _hollerTagCookieLicence2 = _interopRequireDefault(_hollerTagCookieLicence);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -534,8 +538,20 @@ exports.default = {
     return {
       supportsLocalStorage: true,
       isOpen: false,
-      selected: ['Necessary']
+      selected: ['Necessary'],
+      showMore: false,
+      showMoreTab: 0,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      cookieDecalration: ['Necessary', 'Statistics', 'Others'],
+      cookieTabClicked: 'Necessary',
+      cookieLicenceJson: _hollerTagCookieLicence2.default,
+      headers: [{ text: 'Name', value: 'name' }, { text: 'Provider', value: 'provider' }, { text: 'Purpose', value: 'purpose' }, { text: 'Expiry', value: 'expiry' }, { text: 'Type', value: 'type' }]
+
     };
+  },
+  mounted: function mounted() {
+    console.log('mounted');
+    console.log(this.cookieLicenceJson);
   },
 
   computed: {
@@ -590,6 +606,10 @@ exports.default = {
       this.setVisited(this.selected);
       this.isOpen = false;
       this.$emit('accept', this.selected);
+    },
+    cookieTab: function cookieTab(item) {
+      console.log(item);
+      this.cookieTabClicked = item;
     }
   }
 };
@@ -820,8 +840,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3d45cd9e_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3d45cd9e_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(84);
 var disposed = false
 function injectStyle (context) {
   if (disposed) return
@@ -906,7 +926,7 @@ exports = module.exports = __webpack_require__(41)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/icon?family=Material+Icons);", ""]);
 
 // module
-exports.push([module.i, "\n.Cookie {\n  position: fixed;\n  overflow: hidden;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 9999;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.Cookie > * {\n    margin: 0.9375rem 0;\n    -ms-flex-item-align: center;\n        align-self: center;\n}\n@media screen and (min-width: 48rem) {\n.Cookie {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row;\n              flex-flow: row;\n}\n.Cookie > * {\n        margin: 0;\n}\n}\n.Cookie--top {\n  top: 0;\n  left: 0;\n  right: 0;\n}\n.Cookie--bottom {\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.Cookie__buttons {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.Cookie__buttons > * {\n    margin: 0.3125rem 0;\n}\n@media screen and (min-width: 48rem) {\n.Cookie__buttons {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n}\n.Cookie__buttons > * {\n        margin: 0 0.9375rem;\n}\n}\n.Cookie__buttons > div:nth-child(4) > button {\n  margin: 0 !important;\n}\n.Cookie__button {\n  cursor: pointer;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.Cookie_checkbox {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.Cookie_header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 20px 0;\n  -webkit-box-align: baseline;\n      -ms-flex-align: baseline;\n          align-items: baseline;\n}\n.Cookie--base {\n  background: #f1f1f1;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--base .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--base .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--base--rounded {\n  background: #f1f1f1;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--base--rounded .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--base--rounded .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--blood-orange {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--blood-orange .Cookie__button {\n    background: #ad2624 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--blood-orange .Cookie__button:hover {\n      background: #831d1b;\n}\n.Cookie--blood-orange--rounded {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--blood-orange--rounded .Cookie__button {\n    background: #e76a68 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--blood-orange--rounded .Cookie__button:hover {\n      background: #e03f3c;\n}\n.Cookie--dark-lime {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--dark-lime .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--dark-lime .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--dark-lime--rounded {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--dark-lime--rounded .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--dark-lime--rounded .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--royal {\n  background: #fbc227;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--royal .Cookie__button {\n    background: #726cea !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--royal .Cookie__button:hover {\n      background: #473fe4;\n}\n.Cookie--royal--rounded {\n  background: #fbc227;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--royal--rounded .Cookie__button {\n    background: #726cea !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--royal--rounded .Cookie__button:hover {\n      background: #473fe4;\n}\n.slideFromTop-enter,\n.slideFromTop-leave-to {\n  -webkit-transform: translate(0px, -12.5em);\n          transform: translate(0px, -12.5em);\n}\n.slideFromTop-enter-to,\n.slideFromTop-leave {\n  -webkit-transform: translate(0px, 0px);\n          transform: translate(0px, 0px);\n}\n.slideFromBottom-enter,\n.slideFromBottom-leave-to {\n  -webkit-transform: translate(0px, 12.5em);\n          transform: translate(0px, 12.5em);\n}\n.slideFromBottom-enter-to,\n.slideFromBottom-leave {\n  -webkit-transform: translate(0px, 0px);\n          transform: translate(0px, 0px);\n}\n.slideFromBottom-enter-active,\n.slideFromBottom-leave-active,\n.slideFromTop-enter-active,\n.slideFromTop-leave-active {\n  -webkit-transition: -webkit-transform 0.4s ease-in;\n  transition: -webkit-transform 0.4s ease-in;\n  transition: transform 0.4s ease-in;\n  transition: transform 0.4s ease-in, -webkit-transform 0.4s ease-in;\n}\n.fade-enter-active,\n.fade-leave-active {\n  -webkit-transition: opacity 0.5s;\n  transition: opacity 0.5s;\n}\n.fade-enter,\n.fade-leave-to {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.Cookie {\n  position: fixed;\n  overflow: hidden;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 9999;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.Cookie > * {\n    margin: 0.9375rem 0;\n    -ms-flex-item-align: center;\n        align-self: center;\n}\n@media screen and (min-width: 48rem) {\n.Cookie {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row;\n              flex-flow: row;\n}\n.Cookie > * {\n        margin: 0;\n}\n}\n.Cookie--top {\n  top: 0;\n  left: 0;\n  right: 0;\n}\n.Cookie--bottom {\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.Cookie__buttons {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.Cookie__buttons > * {\n    margin: 0.3125rem 0;\n}\n@media screen and (min-width: 48rem) {\n.Cookie__buttons {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n}\n.Cookie__buttons > * {\n        margin: 0 0.9375rem;\n}\n}\n.Cookie__buttons > div:nth-child(4) > button {\n  margin: 0 !important;\n}\n.Cookie__button {\n  cursor: pointer;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.Cookie_checkbox {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.Cookie_header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 20px 0;\n  -webkit-box-align: baseline;\n      -ms-flex-align: baseline;\n          align-items: baseline;\n}\n.Cookie-tab a {\n  font-size: 12px !important;\n  height: 40px;\n}\n.Cookie-show-more {\n  position: relative;\n  bottom: 10px;\n}\n.Cookie-tab .tabs__items {\n  overflow-y: visible;\n  height: 100px;\n}\n.Cookie-active-tab {\n  background-color: rgba(0, 0, 0, 0.12) !important;\n  text-shadow: none;\n}\n.Cookie--base {\n  background: #f1f1f1;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--base .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--base .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--base--rounded {\n  background: #f1f1f1;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--base--rounded .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--base--rounded .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--blood-orange {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--blood-orange .Cookie__button {\n    background: #ad2624 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--blood-orange .Cookie__button:hover {\n      background: #831d1b;\n}\n.Cookie--blood-orange--rounded {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--blood-orange--rounded .Cookie__button {\n    background: #e76a68 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--blood-orange--rounded .Cookie__button:hover {\n      background: #e03f3c;\n}\n.Cookie--dark-lime {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--dark-lime .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--dark-lime .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--dark-lime--rounded {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--dark-lime--rounded .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--dark-lime--rounded .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--royal {\n  background: #fbc227;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--royal .Cookie__button {\n    background: #726cea !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--royal .Cookie__button:hover {\n      background: #473fe4;\n}\n.Cookie--royal--rounded {\n  background: #fbc227;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--royal--rounded .Cookie__button {\n    background: #726cea !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--royal--rounded .Cookie__button:hover {\n      background: #473fe4;\n}\n.slideFromTop-enter,\n.slideFromTop-leave-to {\n  -webkit-transform: translate(0px, -12.5em);\n          transform: translate(0px, -12.5em);\n}\n.slideFromTop-enter-to,\n.slideFromTop-leave {\n  -webkit-transform: translate(0px, 0px);\n          transform: translate(0px, 0px);\n}\n.slideFromBottom-enter,\n.slideFromBottom-leave-to {\n  -webkit-transform: translate(0px, 12.5em);\n          transform: translate(0px, 12.5em);\n}\n.slideFromBottom-enter-to,\n.slideFromBottom-leave {\n  -webkit-transform: translate(0px, 0px);\n          transform: translate(0px, 0px);\n}\n.slideFromBottom-enter-active,\n.slideFromBottom-leave-active,\n.slideFromTop-enter-active,\n.slideFromTop-leave-active {\n  -webkit-transition: -webkit-transform 0.4s ease-in;\n  transition: -webkit-transform 0.4s ease-in;\n  transition: transform 0.4s ease-in;\n  transition: transform 0.4s ease-in, -webkit-transform 0.4s ease-in;\n}\n.fade-enter-active,\n.fade-leave-active {\n  -webkit-transition: opacity 0.5s;\n  transition: opacity 0.5s;\n}\n.fade-enter,\n.fade-leave-to {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -2271,6 +2291,12 @@ function convert(opts) {
 
 /***/ }),
 /* 82 */
+/***/ (function(module, exports) {
+
+module.exports = {"Necessary":[{"Name":"CookieConsent","Provider":"www.hollertag.com","Purpose":"Stores the user's cookie consent state for the current domain","Expiry":"1 year","Type":"HTTP"}],"Statistics":[{"Name":"_dc_gtm_UA-#","Provider":"www.hollertag.com","Purpose":"Used by Google Tag Manager to control the loading of a Google Analytics script tag.","Expiry":"Session","Type":"HTTP"},{"Name":"_ga","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"2 Years","Type":"HTTP"},{"Name":"_gid","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"Session","Type":"HTTP"},{"Name":"fr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"3 months","Type":"HTTP"},{"Name":"tr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"Session","Type":"Pixel"}],"Unclassified":[],"Flag":[{"Name":"ads/ga-audiences","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors that are likely to convert to customers based on the visitor's online behaviour across websites.","Expiry":"Session","Type":"Pixel"},{"Name":"ads/user-lists/#","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors across the web in ad groups","Expiry":"Session","Type":"Pixel"},{"Name":"NID","Provider":"google.com","Purpose":"Registers a unique ID that identifies a returning user's device. The ID is used for targeted ads.","Expiry":"6 months","Type":"HTTP"}]}
+
+/***/ }),
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2360,7 +2386,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "v-flex",
-                      { attrs: { xs1: "" } },
+                      { staticClass: "mr-0", attrs: { xs1: "" } },
                       [
                         _c("v-checkbox", {
                           staticClass: "text--white",
@@ -2377,13 +2403,39 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("v-flex", { attrs: { xs1: "" } }, [
-                      _c(
-                        "span",
-                        [_vm._v("Show More"), _c("v-icon", [_vm._v("home")])],
-                        1
-                      )
-                    ]),
+                    _c(
+                      "v-flex",
+                      { staticClass: "ml-0", attrs: { xs1: "" } },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "ma-0",
+                            attrs: { depressed: "", small: "" },
+                            on: {
+                              click: function($event) {
+                                $event.stopPropagation()
+                                _vm.showMore = !_vm.showMore
+                              }
+                            }
+                          },
+                          [
+                            _vm._v("Show More"),
+                            _vm.showMore
+                              ? _c("v-icon", { attrs: { dark: "" } }, [
+                                  _vm._v("mdi-chevron-up")
+                                ])
+                              : !_vm.showMore
+                                ? _c("v-icon", { attrs: { dark: "" } }, [
+                                    _vm._v("mdi-chevron-down")
+                                  ])
+                                : _vm._e()
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
                       "v-flex",
@@ -2392,6 +2444,7 @@ var render = function() {
                         _c(
                           "v-btn",
                           {
+                            staticClass: "ma-0",
                             class: _vm.buttonClass,
                             attrs: { depressed: "" },
                             on: { click: _vm.accept }
@@ -2406,7 +2459,412 @@ var render = function() {
                 )
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _vm.showMore
+              ? _c(
+                  "v-layout",
+                  { staticClass: "Cookie-show-more px-3", attrs: { row: "" } },
+                  [
+                    _c(
+                      "v-flex",
+                      { staticClass: "px-3" },
+                      [
+                        _c(
+                          "v-tabs",
+                          {
+                            staticClass: "Cookie-tab",
+                            attrs: { dark: "" },
+                            model: {
+                              value: _vm.showMoreTab,
+                              callback: function($$v) {
+                                _vm.showMoreTab = $$v
+                              },
+                              expression: "showMoreTab"
+                            }
+                          },
+                          [
+                            _c(
+                              "v-tab",
+                              {
+                                key: "0",
+                                attrs: {
+                                  "active-class": "Cookie-active-tab",
+                                  ripple: ""
+                                }
+                              },
+                              [_c("strong", [_vm._v("Cookie Declaration")])]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-tab",
+                              {
+                                key: "1",
+                                attrs: {
+                                  "active-class": "Cookie-active-tab",
+                                  ripple: ""
+                                }
+                              },
+                              [_c("strong", [_vm._v("About Cookie")])]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-tab-item",
+                              { key: "0" },
+                              [
+                                _c(
+                                  "v-card",
+                                  {
+                                    staticClass: "d-flex",
+                                    attrs: { flat: "" }
+                                  },
+                                  [
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs1: "" } },
+                                      [
+                                        _c(
+                                          "v-list",
+                                          {
+                                            staticClass: "pt-0",
+                                            attrs: { dense: "" }
+                                          },
+                                          _vm._l(
+                                            _vm.cookieDecalration,
+                                            function(item) {
+                                              return _c(
+                                                "v-list-tile",
+                                                {
+                                                  key: item,
+                                                  class: {
+                                                    "Cookie-active-tab":
+                                                      _vm.cookieTabClicked ===
+                                                      item
+                                                  },
+                                                  attrs: { ripple: "" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.cookieTab(item)
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    " " + _vm._s(item) + " "
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          )
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _vm.cookieTabClicked === "Necessary"
+                                      ? _c(
+                                          "v-flex",
+                                          {
+                                            staticClass:
+                                              "text-xs-left pa-2 caption"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                  These cookies are necessary for the Website to function and cannot be turned off in our systems. They are usually only set in response to actions made by you which amount to a request for information or services, such as logging in or filling in forms on our Website. You can set your browser to block or alert you about these cookies, but some parts of the Website will not then work. These cookies do not store any personally identifiable information.\n                  "
+                                            ),
+                                            _c("div", { staticClass: "py-2" }),
+                                            _vm._v(" "),
+                                            _c("v-data-table", {
+                                              staticClass: "elevation-5",
+                                              attrs: {
+                                                "hide-actions": "",
+                                                headers: _vm.headers,
+                                                items:
+                                                  _vm.cookieLicenceJson
+                                                    .Necessary
+                                              },
+                                              scopedSlots: _vm._u([
+                                                {
+                                                  key: "items",
+                                                  fn: function(props) {
+                                                    return [
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Name
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Provider
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Purpose
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Expiry
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Type
+                                                          )
+                                                        )
+                                                      ])
+                                                    ]
+                                                  }
+                                                }
+                                              ])
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.cookieTabClicked === "Statistics"
+                                      ? _c(
+                                          "v-flex",
+                                          {
+                                            staticClass:
+                                              "text-xs-left pa-2 caption"
+                                          },
+                                          [
+                                            _c("p", [
+                                              _vm._v(
+                                                "\n                    These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other websites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.\n                  "
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "py-2" }),
+                                            _vm._v(" "),
+                                            _c("v-data-table", {
+                                              staticClass: "elevation-5",
+                                              attrs: {
+                                                "hide-actions": "",
+                                                headers: _vm.headers,
+                                                items:
+                                                  _vm.cookieLicenceJson
+                                                    .Statistics
+                                              },
+                                              scopedSlots: _vm._u([
+                                                {
+                                                  key: "items",
+                                                  fn: function(props) {
+                                                    return [
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Name
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Provider
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Purpose
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Expiry
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Type
+                                                          )
+                                                        )
+                                                      ])
+                                                    ]
+                                                  }
+                                                }
+                                              ])
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.cookieTabClicked === "Others"
+                                      ? _c(
+                                          "v-flex",
+                                          {
+                                            staticClass:
+                                              "text-xs-left pa-2 caption"
+                                          },
+                                          [
+                                            _c("p", [
+                                              _vm._v(
+                                                "\n                    Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies.\n                  "
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("div", { staticClass: "py-2" }),
+                                            _vm._v(" "),
+                                            _c("v-data-table", {
+                                              staticClass: "elevation-5",
+                                              attrs: {
+                                                "hide-actions": "",
+                                                headers: _vm.headers,
+                                                items:
+                                                  _vm.cookieLicenceJson
+                                                    .Unclassified
+                                              },
+                                              scopedSlots: _vm._u([
+                                                {
+                                                  key: "items",
+                                                  fn: function(props) {
+                                                    return [
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Name
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Provider
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Purpose
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Expiry
+                                                          )
+                                                        )
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            props.item.Type
+                                                          )
+                                                        )
+                                                      ])
+                                                    ]
+                                                  }
+                                                }
+                                              ])
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e()
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-tab-item",
+                              { key: "1" },
+                              [
+                                _c(
+                                  "v-card",
+                                  { attrs: { flat: "" } },
+                                  [
+                                    _c(
+                                      "v-card-text",
+                                      {
+                                        staticClass: "text-xs-left caption pt-0"
+                                      },
+                                      [
+                                        _c("v-flex", { staticClass: "py-2" }, [
+                                          _c("p", [
+                                            _vm._v(
+                                              "Cookies are small text files that can be used by websites to make a user's experience more efficient."
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("p", [
+                                            _vm._v(
+                                              "The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission."
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("p", [
+                                            _vm._v(
+                                              "This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages."
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("p", [
+                                            _vm._v(
+                                              "You can at any time change or withdraw your consent from the Cookie Declaration on our website."
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("p", [
+                                            _vm._v(
+                                              "Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy."
+                                            )
+                                          ])
+                                        ])
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              : _vm._e()
           ],
           1
         )
@@ -2424,7 +2882,7 @@ if (false) {
 }
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

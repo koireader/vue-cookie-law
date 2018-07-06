@@ -8,12 +8,12 @@
       </v-layout>
       <div class="Cookie_checkbox">
         <v-layout row class="Cookie__buttons">
-          <!-- <div style="border-bottom: 1px solid white; height: 10px; position: absolute; top: 93px; width: 100%;"></div> -->
+          <!-- <div style="border-bottom: 1px solid white; height: 10px; position: absolute; top: 113px; width: 100%;"></div> -->
           <v-flex xs1><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
           <v-flex xs1><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
           <v-flex xs1 class="mr-0"><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
-          <v-flex xs1 class="ml-0"><v-btn depressed small @click.stop="showMore = !showMore" class="ma-0">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
-          <v-flex class="text-xs-right">
+          <v-flex xs1 class="mt-3"><v-btn depressed small @click.stop="showMore = !showMore" class="ma-0">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
+          <v-flex class="text-xs-right mt-3">
             <v-btn depressed :class="buttonClass" @click="accept" class="ma-0">{{ buttonText }}</v-btn>        
           </v-flex>
         </v-layout>
@@ -166,7 +166,7 @@
         supportsLocalStorage: true,
         isOpen: false,
         selected: ['Necessary'],
-        showMore: true,
+        showMore: false,
         showMoreTab: 0,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         cookieDecalration: ['Necessary', 'Statistics', 'Others'],
@@ -178,11 +178,11 @@
           { text: 'Purpose', value: 'purpose' },
           { text: 'Expiry', value: 'expiry' },
           { text: 'Type', value: 'type' }
-          ],
+        ]
 
       }
     },
-    mounted() {
+    mounted () {
       console.log('mounted')
       console.log(this.cookieLicenceJson)
     },
