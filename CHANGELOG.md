@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.10.0](https://github.com/apertureless/vue-cookie-law/compare/v1.9.0...v1.10.0) (2019-03-18)
+
+
+### Bug Fixes
+
+* **build:** Add production env flag ([9dec5cf](https://github.com/apertureless/vue-cookie-law/commit/9dec5cf)), closes [#44](https://github.com/apertureless/vue-cookie-law/issues/44)
+* **style:** Add nowrap to button ([#46](https://github.com/apertureless/vue-cookie-law/issues/46)) ([b155e85](https://github.com/apertureless/vue-cookie-law/commit/b155e85))
+
+
+### Features
+
+* Add storage-type ([#47](https://github.com/apertureless/vue-cookie-law/issues/47)) ([16b14b1](https://github.com/apertureless/vue-cookie-law/commit/16b14b1))
+
+
+
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/apertureless/vue-cookie-law/compare/v1.8.0...v1.9.0) (2019-02-16)
+
+
+### Features
+
+* Add method to show notification manually ([#45](https://github.com/apertureless/vue-cookie-law/issues/45)) ([db8426e](https://github.com/apertureless/vue-cookie-law/commit/db8426e))
+
+
+
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/apertureless/vue-cookie-law/compare/v1.7.0...v1.8.0) (2018-10-21)
+
+
+### Features
+
+* add slot and close method ([#42](https://github.com/apertureless/vue-cookie-law/issues/42)) ([d992481](https://github.com/apertureless/vue-cookie-law/commit/d992481))
+
+
+
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/apertureless/vue-cookie-law/compare/v1.6.0...v1.7.0) (2018-10-04)
+
+
+### Bug Fixes
+
+* **button:** Use real button tag to improve accessibility. ([#39](https://github.com/apertureless/vue-cookie-law/issues/39)) ([cbe26ad](https://github.com/apertureless/vue-cookie-law/commit/cbe26ad))
+
+
+### Features
+
+* **interal:** LocalStorage item name as prop ([#41](https://github.com/apertureless/vue-cookie-law/issues/41)) ([26c5266](https://github.com/apertureless/vue-cookie-law/commit/26c5266))
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/apertureless/vue-cookie-law/compare/v1.5.0...v1.6.0) (2018-05-16)
 

@@ -1,6 +1,6 @@
 /*!
- * vue-cookie-law v1.6.0
- * (c) 2018 Jakub Juszczak <jakub@posteo.de>
+ * vue-cookie-law v1.10.0
+ * (c) 2019 Jakub Juszczak <jakub@posteo.de>
  * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -94,14 +94,6 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 1 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.7' };
-if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
 var hasOwnProperty = {}.hasOwnProperty;
 module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
@@ -109,15 +101,23 @@ module.exports = function (it, key) {
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(49);
+var IObject = __webpack_require__(47);
 var defined = __webpack_require__(15);
 module.exports = function (it) {
   return IObject(defined(it));
 };
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var core = module.exports = { version: '2.5.7' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
 /***/ }),
@@ -299,7 +299,7 @@ module.exports = function (key) {
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var core = __webpack_require__(1);
+var core = __webpack_require__(3);
 var global = __webpack_require__(0);
 var SHARED = '__core-js_shared__';
 var store = global[SHARED] || (global[SHARED] = {});
@@ -328,10 +328,10 @@ module.exports = (
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(0);
-var core = __webpack_require__(1);
-var ctx = __webpack_require__(54);
+var core = __webpack_require__(3);
+var ctx = __webpack_require__(52);
 var hide = __webpack_require__(4);
-var has = __webpack_require__(2);
+var has = __webpack_require__(1);
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -421,7 +421,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(5).f;
-var has = __webpack_require__(2);
+var has = __webpack_require__(1);
 var TAG = __webpack_require__(7)('toStringTag');
 
 module.exports = function (it, tag, stat) {
@@ -441,7 +441,7 @@ exports.f = __webpack_require__(7);
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(0);
-var core = __webpack_require__(1);
+var core = __webpack_require__(3);
 var LIBRARY = __webpack_require__(11);
 var wksExt = __webpack_require__(24);
 var defineProperty = __webpack_require__(5).f;
@@ -469,31 +469,33 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = __webpack_require__(44);
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
-var _keys = __webpack_require__(46);
+var _keys = __webpack_require__(44);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _typeof2 = __webpack_require__(56);
+var _typeof2 = __webpack_require__(54);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-var _tinyCookie = __webpack_require__(80);
+var _tinyCookie = __webpack_require__(78);
 
 var Cookie = _interopRequireWildcard(_tinyCookie);
 
-var _hollerTagCookieLicence = __webpack_require__(82);
+var _koireaderCookieLicence = __webpack_require__(80);
 
-var _hollerTagCookieLicence2 = _interopRequireDefault(_hollerTagCookieLicence);
+var _koireaderCookieLicence2 = _interopRequireDefault(_koireaderCookieLicence);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var STORAGE_TYPES = {
+  local: 'localStorage',
+  cookies: 'cookies'
+};
+
 exports.default = {
+  name: 'VueCookieLaw',
   props: {
     buttonText: {
       type: String,
@@ -532,6 +534,14 @@ exports.default = {
     buttonClass: {
       type: String,
       default: 'Cookie__button'
+    },
+    storageName: {
+      type: String,
+      default: 'cookie:accepted'
+    },
+    storageType: {
+      type: String,
+      default: STORAGE_TYPES.local
     }
   },
   data: function data() {
@@ -544,7 +554,7 @@ exports.default = {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       cookieDecalration: ['Necessary', 'Statistics', 'Others'],
       cookieTabClicked: 'Necessary',
-      cookieLicenceJson: _hollerTagCookieLicence2.default,
+      cookieLicenceJson: _koireaderCookieLicence2.default,
       headers: [{ text: 'Name', value: 'name' }, { text: 'Provider', value: 'provider' }, { text: 'Purpose', value: 'purpose' }, { text: 'Expiry', value: 'expiry' }, { text: 'Type', value: 'type' }]
 
     };
@@ -569,17 +579,22 @@ exports.default = {
     },
     target: function target() {
       return this.buttonLinkNewTab ? '_blank' : '_self';
+    },
+    canUseLocalStorage: function canUseLocalStorage() {
+      return this.storageType === STORAGE_TYPES.local && this.supportsLocalStorage;
     }
   },
   created: function created() {
-    try {
-      var test = '__vue-cookielaw-check-localStorage';
+    if (this.storageType === STORAGE_TYPES.local) {
+      try {
+        var test = '__vue-cookielaw-check-localStorage';
 
-      window.localStorage.setItem(test, test);
-      window.localStorage.removeItem(test);
-    } catch (e) {
-      console.error('Local storage is not supported, falling back to cookie use');
-      this.supportsLocalStorage = false;
+        window.localStorage.setItem(test, test);
+        window.localStorage.removeItem(test);
+      } catch (e) {
+        console.info('Local storage is not supported, falling back to cookie use');
+        this.supportsLocalStorage = false;
+      }
     }
 
     if (!this.getVisited() === true) {
@@ -588,28 +603,32 @@ exports.default = {
   },
 
   methods: {
-    setVisited: function setVisited(data) {
-      if (this.supportsLocalStorage) {
-        localStorage.setItem('cookie:accepted', (0, _stringify2.default)(data));
+    setVisited: function setVisited() {
+      if (this.canUseLocalStorage) {
+        localStorage.setItem(this.storageName, true);
       } else {
-        Cookie.set('cookie:accepted', (0, _stringify2.default)(data));
+        Cookie.set(this.storageName, true);
       }
     },
     getVisited: function getVisited() {
-      if (this.supportsLocalStorage) {
-        return JSON.parse(localStorage.getItem('cookie:accepted'));
+      if (this.canUseLocalStorage) {
+        return localStorage.getItem(this.storageName);
       } else {
-        return JSON.parse(Cookie.get('cookie:accepted'));
+        return Cookie.get(this.storageName);
       }
     },
     accept: function accept() {
       this.setVisited(this.selected);
       this.isOpen = false;
-      this.$emit('accept', this.selected);
+      this.$emit('accept');
     },
-    cookieTab: function cookieTab(item) {
-      console.log(item);
-      this.cookieTabClicked = item;
+    close: function close() {
+      this.isOpen = false;
+    },
+    open: function open() {
+      if (!this.getVisited() === true) {
+        this.isOpen = true;
+      }
     }
   }
 };
@@ -629,9 +648,9 @@ module.exports = function (it) {
 /* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var has = __webpack_require__(2);
-var toIObject = __webpack_require__(3);
-var arrayIndexOf = __webpack_require__(50)(false);
+var has = __webpack_require__(1);
+var toIObject = __webpack_require__(2);
+var arrayIndexOf = __webpack_require__(48)(false);
 var IE_PROTO = __webpack_require__(17)('IE_PROTO');
 
 module.exports = function (object, names) {
@@ -692,9 +711,9 @@ var $export = __webpack_require__(20);
 var redefine = __webpack_require__(34);
 var hide = __webpack_require__(4);
 var Iterators = __webpack_require__(22);
-var $iterCreate = __webpack_require__(61);
+var $iterCreate = __webpack_require__(59);
 var setToStringTag = __webpack_require__(23);
-var getPrototypeOf = __webpack_require__(64);
+var getPrototypeOf = __webpack_require__(62);
 var ITERATOR = __webpack_require__(7)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
@@ -770,7 +789,7 @@ module.exports = __webpack_require__(4);
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject = __webpack_require__(13);
-var dPs = __webpack_require__(62);
+var dPs = __webpack_require__(60);
 var enumBugKeys = __webpack_require__(19);
 var IE_PROTO = __webpack_require__(17)('IE_PROTO');
 var Empty = function () { /* empty */ };
@@ -785,7 +804,7 @@ var createDict = function () {
   var gt = '>';
   var iframeDocument;
   iframe.style.display = 'none';
-  __webpack_require__(63).appendChild(iframe);
+  __webpack_require__(61).appendChild(iframe);
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
   // createDict = iframe.contentWindow.Object;
   // html.removeChild(iframe);
@@ -840,11 +859,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3d45cd9e_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(84);
-var disposed = false
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_dbe59868_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(82);
 function injectStyle (context) {
-  if (disposed) return
   __webpack_require__(39)
 }
 /* script */
@@ -863,30 +880,13 @@ var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_CookieLaw_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3d45cd9e_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3d45cd9e_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__["b" /* staticRenderFns */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_dbe59868_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_dbe59868_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_CookieLaw_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "src/components/CookieLaw.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3d45cd9e", Component.options)
-  } else {
-    hotAPI.reload("data-v-3d45cd9e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
@@ -902,20 +902,7 @@ var content = __webpack_require__(40);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(42)("b913e876", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../node_modules/css-loader/index.js?{\"minimize\":false,\"sourceMap\":false}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CookieLaw.vue", function() {
-     var newContent = require("!!../../node_modules/css-loader/index.js?{\"minimize\":false,\"sourceMap\":false}!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CookieLaw.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
+var update = __webpack_require__(42)("2666d94e", content, true, {});
 
 /***/ }),
 /* 40 */
@@ -926,7 +913,7 @@ exports = module.exports = __webpack_require__(41)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/icon?family=Material+Icons);", ""]);
 
 // module
-exports.push([module.i, "\n.Cookie {\n  position: fixed;\n  overflow: hidden;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  z-index: 9999;\n  width: 100%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.Cookie > * {\n    margin: 0.9375rem 0;\n    -ms-flex-item-align: center;\n        align-self: center;\n}\n@media screen and (min-width: 48rem) {\n.Cookie {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row;\n              flex-flow: row;\n}\n.Cookie > * {\n        margin: 0;\n}\n}\n.Cookie--top {\n  top: 0;\n  left: 0;\n  right: 0;\n}\n.Cookie--bottom {\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n.Cookie__buttons {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.Cookie__buttons > * {\n    margin: 0.3125rem 0;\n}\n@media screen and (min-width: 48rem) {\n.Cookie__buttons {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n}\n.Cookie__buttons > * {\n        margin: 0 0.9375rem;\n}\n}\n.Cookie__buttons > div:nth-child(4) > button {\n  margin: 0 !important;\n}\n.Cookie__button {\n  cursor: pointer;\n  -ms-flex-item-align: center;\n      align-self: center;\n}\n.Cookie_checkbox {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.Cookie_header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding: 20px 0;\n  -webkit-box-align: baseline;\n      -ms-flex-align: baseline;\n          align-items: baseline;\n}\n.Cookie-tab a {\n  font-size: 12px !important;\n  height: 40px;\n}\n.Cookie-show-more {\n  position: relative;\n  bottom: 10px;\n}\n.Cookie-tab .tabs__items {\n  overflow-y: visible;\n  height: 100px;\n}\n.Cookie-active-tab {\n  background-color: rgba(0, 0, 0, 0.12) !important;\n  text-shadow: none;\n}\n.Cookie--base {\n  background: #f1f1f1;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--base .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--base .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--base--rounded {\n  background: #f1f1f1;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--base--rounded .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--base--rounded .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--blood-orange {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--blood-orange .Cookie__button {\n    background: #ad2624 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--blood-orange .Cookie__button:hover {\n      background: #831d1b;\n}\n.Cookie--blood-orange--rounded {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--blood-orange--rounded .Cookie__button {\n    background: #e76a68 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--blood-orange--rounded .Cookie__button:hover {\n      background: #e03f3c;\n}\n.Cookie--dark-lime {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--dark-lime .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--dark-lime .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--dark-lime--rounded {\n  background: #424851;\n  color: #fff;\n  padding: 1.25em;\n}\n.Cookie--dark-lime--rounded .Cookie__button {\n    background: #97d058 !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--dark-lime--rounded .Cookie__button:hover {\n      background: #7ebf36;\n}\n.Cookie--royal {\n  background: #fbc227;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--royal .Cookie__button {\n    background: #726cea !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 0;\n}\n.Cookie--royal .Cookie__button:hover {\n      background: #473fe4;\n}\n.Cookie--royal--rounded {\n  background: #fbc227;\n  color: #232323;\n  padding: 1.25em;\n}\n.Cookie--royal--rounded .Cookie__button {\n    background: #726cea !important;\n    padding: 0 3.125em;\n    color: #fff;\n    border-radius: 20px;\n}\n.Cookie--royal--rounded .Cookie__button:hover {\n      background: #473fe4;\n}\n.slideFromTop-enter,\n.slideFromTop-leave-to {\n  -webkit-transform: translate(0px, -12.5em);\n          transform: translate(0px, -12.5em);\n}\n.slideFromTop-enter-to,\n.slideFromTop-leave {\n  -webkit-transform: translate(0px, 0px);\n          transform: translate(0px, 0px);\n}\n.slideFromBottom-enter,\n.slideFromBottom-leave-to {\n  -webkit-transform: translate(0px, 12.5em);\n          transform: translate(0px, 12.5em);\n}\n.slideFromBottom-enter-to,\n.slideFromBottom-leave {\n  -webkit-transform: translate(0px, 0px);\n          transform: translate(0px, 0px);\n}\n.slideFromBottom-enter-active,\n.slideFromBottom-leave-active,\n.slideFromTop-enter-active,\n.slideFromTop-leave-active {\n  -webkit-transition: -webkit-transform 0.4s ease-in;\n  transition: -webkit-transform 0.4s ease-in;\n  transition: transform 0.4s ease-in;\n  transition: transform 0.4s ease-in, -webkit-transform 0.4s ease-in;\n}\n.fade-enter-active,\n.fade-leave-active {\n  -webkit-transition: opacity 0.5s;\n  transition: opacity 0.5s;\n}\n.fade-enter,\n.fade-leave-to {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, ".Cookie{position:fixed;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:9999;width:100%;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.Cookie>*{margin:.9375rem 0;-ms-flex-item-align:center;align-self:center}@media screen and (min-width:48rem){.Cookie{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row;flex-flow:row}.Cookie>*{margin:0}}.Cookie .Cookie--top{top:0;left:0;right:0}.Cookie .Cookie--bottom{bottom:0;left:0;right:0}.Cookie .Cookie__button{cursor:pointer;-ms-flex-item-align:center;align-self:center;white-space:nowrap}.Cookie__buttons>div:nth-child(4)>button{margin:0!important}.Cookie__button{cursor:pointer;-ms-flex-item-align:center;align-self:center}.Cookie_checkbox,.Cookie_header{display:-webkit-box;display:-ms-flexbox;display:flex}.Cookie_header{padding:20px 0;-webkit-box-align:baseline;-ms-flex-align:baseline;align-items:baseline}.Cookie-tab a{font-size:12px!important;height:40px}.Cookie-show-more{position:relative;bottom:10px}.Cookie-tab .tabs__items{overflow-y:visible;height:100px}.Cookie-active-tab{background-color:rgba(0,0,0,.12)!important;text-shadow:none}.Cookie--base{background:#f1f1f1;color:#232323;padding:1.25em}.Cookie--base .Cookie__button{background:#97d058!important;padding:0 3.125em;color:#fff;border-radius:0}.Cookie--base .Cookie__button:hover{background:#7ebf36}.Cookie--base--rounded{background:#f1f1f1;color:#232323;padding:1.25em}.Cookie--base--rounded .Cookie__button{background:#97d058!important;padding:0 3.125em;color:#fff;border-radius:20px}.Cookie--base--rounded .Cookie__button:hover{background:#7ebf36}.Cookie--blood-orange{background:#424851;color:#fff;padding:1.25em}.Cookie--blood-orange .Cookie__button{background:#ad2624!important;padding:0 3.125em;color:#fff;border-radius:0}.Cookie--blood-orange .Cookie__button:hover{background:#831d1b}.Cookie--blood-orange--rounded{background:#424851;color:#fff;padding:1.25em}.Cookie--blood-orange--rounded .Cookie__button{background:#e76a68!important;padding:0 3.125em;color:#fff;border-radius:20px}.Cookie--blood-orange--rounded .Cookie__button:hover{background:#e03f3c}.Cookie--dark-lime{background:#424851;color:#fff;padding:1.25em}.Cookie--dark-lime .Cookie__button{background:#97d058!important;padding:0 3.125em;color:#fff;border-radius:0}.Cookie--dark-lime .Cookie__button:hover{background:#7ebf36}.Cookie--dark-lime--rounded{background:#424851;color:#fff;padding:1.25em}.Cookie--dark-lime--rounded .Cookie__button{background:#97d058!important;padding:0 3.125em;color:#fff;border-radius:20px}.Cookie--dark-lime--rounded .Cookie__button:hover{background:#7ebf36}.Cookie--royal{background:#fbc227;color:#232323;padding:1.25em}.Cookie--royal .Cookie__button{background:#726cea!important;padding:0 3.125em;color:#fff;border-radius:0}.Cookie--royal .Cookie__button:hover{background:#473fe4}.Cookie--royal--rounded{background:#fbc227;color:#232323;padding:1.25em}.Cookie--royal--rounded .Cookie__button{background:#726cea!important;padding:0 3.125em;color:#fff;border-radius:20px}.Cookie--royal--rounded .Cookie__button:hover{background:#473fe4}.slideFromTop-enter,.slideFromTop-leave-to{-webkit-transform:translateY(-12.5em);transform:translateY(-12.5em)}.slideFromTop-enter-to,.slideFromTop-leave{-webkit-transform:translate(0);transform:translate(0)}.slideFromBottom-enter,.slideFromBottom-leave-to{-webkit-transform:translateY(12.5em);transform:translateY(12.5em)}.slideFromBottom-enter-to,.slideFromBottom-leave{-webkit-transform:translate(0);transform:translate(0)}.slideFromBottom-enter-active,.slideFromBottom-leave-active,.slideFromTop-enter-active,.slideFromTop-leave-active{-webkit-transition:-webkit-transform .4s ease-in;transition:-webkit-transform .4s ease-in;transition:transform .4s ease-in;transition:transform .4s ease-in,-webkit-transform .4s ease-in}.fade-enter-active,.fade-leave-active{-webkit-transition:opacity .5s;transition:opacity .5s}.fade-enter,.fade-leave-to{opacity:0}", ""]);
 
 // exports
 
@@ -1284,36 +1271,19 @@ module.exports = { "default": __webpack_require__(45), __esModule: true };
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var core = __webpack_require__(1);
-var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
-module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
-  return $JSON.stringify.apply($JSON, arguments);
-};
+__webpack_require__(46);
+module.exports = __webpack_require__(3).Object.keys;
 
 
 /***/ }),
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(47), __esModule: true };
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(48);
-module.exports = __webpack_require__(1).Object.keys;
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // 19.1.2.14 Object.keys(O)
 var toObject = __webpack_require__(28);
 var $keys = __webpack_require__(10);
 
-__webpack_require__(53)('keys', function () {
+__webpack_require__(51)('keys', function () {
   return function keys(it) {
     return $keys(toObject(it));
   };
@@ -1321,7 +1291,7 @@ __webpack_require__(53)('keys', function () {
 
 
 /***/ }),
-/* 49 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
@@ -1333,14 +1303,14 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 50 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(3);
-var toLength = __webpack_require__(51);
-var toAbsoluteIndex = __webpack_require__(52);
+var toIObject = __webpack_require__(2);
+var toLength = __webpack_require__(49);
+var toAbsoluteIndex = __webpack_require__(50);
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIObject($this);
@@ -1362,7 +1332,7 @@ module.exports = function (IS_INCLUDES) {
 
 
 /***/ }),
-/* 51 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
@@ -1374,7 +1344,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 52 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(16);
@@ -1387,12 +1357,12 @@ module.exports = function (index, length) {
 
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
 var $export = __webpack_require__(20);
-var core = __webpack_require__(1);
+var core = __webpack_require__(3);
 var fails = __webpack_require__(9);
 module.exports = function (KEY, exec) {
   var fn = (core.Object || {})[KEY] || Object[KEY];
@@ -1403,11 +1373,11 @@ module.exports = function (KEY, exec) {
 
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // optional / simple context binding
-var aFunction = __webpack_require__(55);
+var aFunction = __webpack_require__(53);
 module.exports = function (fn, that, length) {
   aFunction(fn);
   if (that === undefined) return fn;
@@ -1429,7 +1399,7 @@ module.exports = function (fn, that, length) {
 
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
@@ -1439,7 +1409,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 56 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1447,11 +1417,11 @@ module.exports = function (it) {
 
 exports.__esModule = true;
 
-var _iterator = __webpack_require__(57);
+var _iterator = __webpack_require__(55);
 
 var _iterator2 = _interopRequireDefault(_iterator);
 
-var _symbol = __webpack_require__(69);
+var _symbol = __webpack_require__(67);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
@@ -1466,27 +1436,27 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 };
 
 /***/ }),
-/* 57 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(58), __esModule: true };
+module.exports = { "default": __webpack_require__(56), __esModule: true };
 
 /***/ }),
-/* 58 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(59);
-__webpack_require__(65);
+__webpack_require__(57);
+__webpack_require__(63);
 module.exports = __webpack_require__(24).f('iterator');
 
 
 /***/ }),
-/* 59 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var $at = __webpack_require__(60)(true);
+var $at = __webpack_require__(58)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
 __webpack_require__(33)(String, 'String', function (iterated) {
@@ -1505,7 +1475,7 @@ __webpack_require__(33)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 60 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(16);
@@ -1528,7 +1498,7 @@ module.exports = function (TO_STRING) {
 
 
 /***/ }),
-/* 61 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1548,7 +1518,7 @@ module.exports = function (Constructor, NAME, next) {
 
 
 /***/ }),
-/* 62 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(5);
@@ -1567,7 +1537,7 @@ module.exports = __webpack_require__(6) ? Object.defineProperties : function def
 
 
 /***/ }),
-/* 63 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var document = __webpack_require__(0).document;
@@ -1575,11 +1545,11 @@ module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 64 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has = __webpack_require__(2);
+var has = __webpack_require__(1);
 var toObject = __webpack_require__(28);
 var IE_PROTO = __webpack_require__(17)('IE_PROTO');
 var ObjectProto = Object.prototype;
@@ -1594,10 +1564,10 @@ module.exports = Object.getPrototypeOf || function (O) {
 
 
 /***/ }),
-/* 65 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(66);
+__webpack_require__(64);
 var global = __webpack_require__(0);
 var hide = __webpack_require__(4);
 var Iterators = __webpack_require__(22);
@@ -1619,15 +1589,15 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 
 /***/ }),
-/* 66 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(67);
-var step = __webpack_require__(68);
+var addToUnscopables = __webpack_require__(65);
+var step = __webpack_require__(66);
 var Iterators = __webpack_require__(22);
-var toIObject = __webpack_require__(3);
+var toIObject = __webpack_require__(2);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
@@ -1660,14 +1630,14 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 67 */
+/* 65 */
 /***/ (function(module, exports) {
 
 module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 68 */
+/* 66 */
 /***/ (function(module, exports) {
 
 module.exports = function (done, value) {
@@ -1676,35 +1646,35 @@ module.exports = function (done, value) {
 
 
 /***/ }),
-/* 69 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(70), __esModule: true };
+module.exports = { "default": __webpack_require__(68), __esModule: true };
 
 /***/ }),
-/* 70 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(71);
+__webpack_require__(69);
+__webpack_require__(75);
+__webpack_require__(76);
 __webpack_require__(77);
-__webpack_require__(78);
-__webpack_require__(79);
-module.exports = __webpack_require__(1).Symbol;
+module.exports = __webpack_require__(3).Symbol;
 
 
 /***/ }),
-/* 71 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // ECMAScript 6 symbols shim
 var global = __webpack_require__(0);
-var has = __webpack_require__(2);
+var has = __webpack_require__(1);
 var DESCRIPTORS = __webpack_require__(6);
 var $export = __webpack_require__(20);
 var redefine = __webpack_require__(34);
-var META = __webpack_require__(72).KEY;
+var META = __webpack_require__(70).KEY;
 var $fails = __webpack_require__(9);
 var shared = __webpack_require__(18);
 var setToStringTag = __webpack_require__(23);
@@ -1712,16 +1682,16 @@ var uid = __webpack_require__(12);
 var wks = __webpack_require__(7);
 var wksExt = __webpack_require__(24);
 var wksDefine = __webpack_require__(25);
-var enumKeys = __webpack_require__(73);
-var isArray = __webpack_require__(74);
+var enumKeys = __webpack_require__(71);
+var isArray = __webpack_require__(72);
 var anObject = __webpack_require__(13);
 var isObject = __webpack_require__(8);
-var toIObject = __webpack_require__(3);
+var toIObject = __webpack_require__(2);
 var toPrimitive = __webpack_require__(21);
 var createDesc = __webpack_require__(14);
 var _create = __webpack_require__(35);
-var gOPNExt = __webpack_require__(75);
-var $GOPD = __webpack_require__(76);
+var gOPNExt = __webpack_require__(73);
+var $GOPD = __webpack_require__(74);
 var $DP = __webpack_require__(5);
 var $keys = __webpack_require__(10);
 var gOPD = $GOPD.f;
@@ -1934,12 +1904,12 @@ setToStringTag(global.JSON, 'JSON', true);
 
 
 /***/ }),
-/* 72 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var META = __webpack_require__(12)('meta');
 var isObject = __webpack_require__(8);
-var has = __webpack_require__(2);
+var has = __webpack_require__(1);
 var setDesc = __webpack_require__(5).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
@@ -1993,7 +1963,7 @@ var meta = module.exports = {
 
 
 /***/ }),
-/* 73 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
@@ -2014,7 +1984,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 74 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
@@ -2025,11 +1995,11 @@ module.exports = Array.isArray || function isArray(arg) {
 
 
 /***/ }),
-/* 75 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(3);
+var toIObject = __webpack_require__(2);
 var gOPN = __webpack_require__(37).f;
 var toString = {}.toString;
 
@@ -2050,14 +2020,14 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 
 /***/ }),
-/* 76 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pIE = __webpack_require__(26);
 var createDesc = __webpack_require__(14);
-var toIObject = __webpack_require__(3);
+var toIObject = __webpack_require__(2);
 var toPrimitive = __webpack_require__(21);
-var has = __webpack_require__(2);
+var has = __webpack_require__(1);
 var IE8_DOM_DEFINE = __webpack_require__(31);
 var gOPD = Object.getOwnPropertyDescriptor;
 
@@ -2072,27 +2042,27 @@ exports.f = __webpack_require__(6) ? gOPD : function getOwnPropertyDescriptor(O,
 
 
 /***/ }),
-/* 77 */
+/* 75 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 78 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(25)('asyncIterator');
 
 
 /***/ }),
-/* 79 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(25)('observable');
 
 
 /***/ }),
-/* 80 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2111,19 +2081,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRawCookie", function() { return getRaw; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRawCookie", function() { return setRaw; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeCookie", function() { return remove; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__(81);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__(79);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+ // Check if the browser cookie is enabled.
 
-
-// Check if the browser cookie is enabled.
 function isEnabled() {
   var key = '@key@';
   var value = '1';
-  var re = new RegExp('(?:^|; )' + key + '=' + value + '(?:;|$)');
-
-  document.cookie = key + '=' + value;
-
+  var re = new RegExp("(?:^|; )" + key + "=" + value + "(?:;|$)");
+  document.cookie = key + "=" + value;
   var enabled = re.test(document.cookie);
 
   if (enabled) {
@@ -2132,17 +2099,19 @@ function isEnabled() {
   }
 
   return enabled;
-}
+} // Get the cookie value by key.
 
-// Get the cookie value by key.
-function get(key) {
-  var decoder = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : decodeURIComponent;
+
+function get(key, decoder) {
+  if (decoder === void 0) {
+    decoder = decodeURIComponent;
+  }
 
   if (typeof key !== 'string' || !key) {
     return null;
   }
 
-  var reKey = new RegExp('(?:^|; )' + Object(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* escapeRe */])(key) + '(?:=([^;]*))?(?:;|$)');
+  var reKey = new RegExp("(?:^|; )" + Object(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* escapeRe */])(key) + "(?:=([^;]*))?(?:;|$)");
   var match = reKey.exec(document.cookie);
 
   if (match === null) {
@@ -2150,67 +2119,73 @@ function get(key) {
   }
 
   return typeof decoder === 'function' ? decoder(match[1]) : match[1];
-}
+} // The all cookies
 
-// The all cookies
-function getAll() {
-  var decoder = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : decodeURIComponent;
+
+function getAll(decoder) {
+  if (decoder === void 0) {
+    decoder = decodeURIComponent;
+  }
 
   var reKey = /(?:^|; )([^=]+?)(?:=([^;]*))?(?:;|$)/g;
   var cookies = {};
-  var match = void 0;
-
+  var match;
   /* eslint-disable no-cond-assign */
+
   while (match = reKey.exec(document.cookie)) {
     reKey.lastIndex = match.index + match.length - 1;
     cookies[match[1]] = typeof decoder === 'function' ? decoder(match[2]) : match[2];
   }
 
   return cookies;
-}
+} // Set a cookie.
 
-// Set a cookie.
-function set(key, value) {
-  var encoder = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : encodeURIComponent;
-  var attrs = arguments[3];
 
-  if ((typeof encoder === 'undefined' ? 'undefined' : _typeof(encoder)) === 'object' && encoder !== null) {
+function set(key, value, encoder, options) {
+  if (encoder === void 0) {
+    encoder = encodeURIComponent;
+  }
+
+  if (typeof encoder === 'object' && encoder !== null) {
     /* eslint-disable no-param-reassign */
-    attrs = encoder;
+    options = encoder;
     encoder = encodeURIComponent;
     /* eslint-enable no-param-reassign */
   }
-  var attrsStr = Object(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* convert */])(attrs || {});
+
+  var attrsStr = Object(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* convert */])(options || {});
   var valueStr = typeof encoder === 'function' ? encoder(value) : value;
-  var newCookie = key + '=' + valueStr + attrsStr;
+  var newCookie = key + "=" + valueStr + attrsStr;
   document.cookie = newCookie;
-}
+} // Remove a cookie by the specified key.
 
-// Remove a cookie by the specified key.
+
 function remove(key, options) {
-  var opts = { expires: -1 };
+  var opts = {
+    expires: -1
+  };
 
-  if (options && options.domain) {
-    opts.domain = options.domain;
+  if (options) {
+    opts = _extends({}, options, opts);
   }
 
   return set(key, 'a', opts);
-}
+} // Get the cookie's value without decoding.
 
-// Get the cookie's value without decoding.
+
 function getRaw(key) {
   return get(key, null);
-}
+} // Set a cookie without encoding the value.
 
-// Set a cookie without encoding the value.
-function setRaw(key, value, opts) {
-  return set(key, value, null, opts);
+
+function setRaw(key, value, options) {
+  return set(key, value, null, options);
 }
 
 
 
 /***/ }),
-/* 81 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2218,18 +2193,16 @@ function setRaw(key, value, opts) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return escapeRe; });
 /* unused harmony export computeExpires */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return convert; });
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
-}
+} // Escape special characters.
 
-// Escape special characters.
+
 function escapeRe(str) {
   return str.replace(/[.*+?^$|[\](){}\\-]/g, '\\$&');
-}
+} // Return a future date by the given string.
 
-// Return a future date by the given string.
+
 function computeExpires(str) {
   var lastCh = str.charAt(str.length - 1);
   var value = parseInt(str, 10);
@@ -2237,45 +2210,57 @@ function computeExpires(str) {
 
   switch (lastCh) {
     case 'Y':
-      expires.setFullYear(expires.getFullYear() + value);break;
+      expires.setFullYear(expires.getFullYear() + value);
+      break;
+
     case 'M':
-      expires.setMonth(expires.getMonth() + value);break;
+      expires.setMonth(expires.getMonth() + value);
+      break;
+
     case 'D':
-      expires.setDate(expires.getDate() + value);break;
+      expires.setDate(expires.getDate() + value);
+      break;
+
     case 'h':
-      expires.setHours(expires.getHours() + value);break;
+      expires.setHours(expires.getHours() + value);
+      break;
+
     case 'm':
-      expires.setMinutes(expires.getMinutes() + value);break;
+      expires.setMinutes(expires.getMinutes() + value);
+      break;
+
     case 's':
-      expires.setSeconds(expires.getSeconds() + value);break;
+      expires.setSeconds(expires.getSeconds() + value);
+      break;
+
     default:
       expires = new Date(str);
   }
 
   return expires;
-}
+} // Convert an object to a cookie option string.
 
-// Convert an object to a cookie option string.
+
 function convert(opts) {
-  var res = '';
+  var res = ''; // eslint-disable-next-line
 
-  // eslint-disable-next-line
   for (var key in opts) {
     if (hasOwn(opts, key)) {
       if (/^expires$/i.test(key)) {
         var expires = opts[key];
 
-        if ((typeof expires === 'undefined' ? 'undefined' : _typeof(expires)) !== 'object') {
+        if (typeof expires !== 'object') {
           expires += typeof expires === 'number' ? 'D' : '';
           expires = computeExpires(expires);
         }
-        res += ';' + key + '=' + expires.toUTCString();
+
+        res += ";" + key + "=" + expires.toUTCString();
       } else if (/^secure$/.test(key)) {
         if (opts[key]) {
-          res += ';' + key;
+          res += ";" + key;
         }
       } else {
-        res += ';' + key + '=' + opts[key];
+        res += ";" + key + "=" + opts[key];
       }
     }
   }
@@ -2290,598 +2275,24 @@ function convert(opts) {
 
 
 /***/ }),
-/* 82 */
+/* 80 */
 /***/ (function(module, exports) {
 
-module.exports = {"Necessary":[{"Name":"CookieConsent","Provider":"www.hollertag.com","Purpose":"Stores the user's cookie consent state for the current domain","Expiry":"1 year","Type":"HTTP"}],"Statistics":[{"Name":"_dc_gtm_UA-#  ","Provider":"www.hollertag.com","Purpose":"Used by Google Tag Manager to control the loading of a Google Analytics script tag.","Expiry":"Session","Type":"HTTP"},{"Name":"_ga","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"2 Years","Type":"HTTP"},{"Name":"_gid","Provider":"www.hollertag.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"Session","Type":"HTTP"},{"Name":"fr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"3 months","Type":"HTTP"},{"Name":"tr","Provider":"facebook.com","Purpose":"Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.","Expiry":"Session","Type":"Pixel"}],"Unclassified":[],"Flag":[{"Name":"ads/ga-audiences","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors that are likely to convert to customers based on the visitor's online behaviour across websites.","Expiry":"Session","Type":"Pixel"},{"Name":"ads/user-lists/#","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors across the web in ad groups","Expiry":"Session","Type":"Pixel"},{"Name":"NID","Provider":"google.com","Purpose":"Registers a unique ID that identifies a returning user's device. The ID is used for targeted ads.","Expiry":"6 months","Type":"HTTP"}]}
+module.exports = {"Necessary":[{"Name":"CookieConsent","Provider":"www.koireader.com","Purpose":"Stores the user's cookie consent state for the current domain","Expiry":"1 year","Type":"HTTP"}],"Statistics":[{"Name":"_dc_gtm_UA-#  ","Provider":"www.koireader.com","Purpose":"Used by Google Tag Manager to control the loading of a Google Analytics script tag.","Expiry":"Session","Type":"HTTP"},{"Name":"_ga","Provider":"www.koireader.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"2 Years","Type":"HTTP"},{"Name":"_gid","Provider":"www.koireader.com","Purpose":"Registers a unique ID that is used to generate statistical data on how the visitor uses the website.","Expiry":"Session","Type":"HTTP"}],"Unclassified":[],"Flag":[{"Name":"ads/ga-audiences","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors that are likely to convert to customers based on the visitor's online behaviour across websites.","Expiry":"Session","Type":"Pixel"},{"Name":"ads/user-lists/#","Provider":"google.com","Purpose":"Used by Google AdWords to re-engage visitors across the web in ad groups","Expiry":"Session","Type":"Pixel"},{"Name":"NID","Provider":"google.com","Purpose":"Registers a unique ID that identifies a returning user's device. The ID is used for targeted ads.","Expiry":"6 months","Type":"HTTP"}]}
 
 /***/ }),
-/* 83 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { appear: "", name: _vm.transitionName } }, [
-    _vm.isOpen
-      ? _c(
-          "div",
-          {
-            staticClass: "Cookie",
-            class: [_vm.containerPosition, _vm.cookieTheme]
-          },
-          [
-            _c(
-              "v-layout",
-              { staticClass: "Cookie_header" },
-              [
-                _c(
-                  "v-flex",
-                  { staticClass: "text-xs-left Cookie__content" },
-                  [_vm._t("message", [_vm._v(_vm._s(_vm.message))])],
-                  2
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "Cookie_checkbox" },
-              [
-                _c(
-                  "v-layout",
-                  { staticClass: "Cookie__buttons", attrs: { row: "" } },
-                  [
-                    _c(
-                      "v-flex",
-                      { attrs: { xs1: "" } },
-                      [
-                        _c("v-checkbox", {
-                          staticClass: "text--white",
-                          attrs: {
-                            dark: "",
-                            disabled: "",
-                            label: "Necessary",
-                            value: "Necessary"
-                          },
-                          model: {
-                            value: _vm.selected,
-                            callback: function($$v) {
-                              _vm.selected = $$v
-                            },
-                            expression: "selected"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      { attrs: { xs1: "" } },
-                      [
-                        _c("v-checkbox", {
-                          staticClass: "text--white",
-                          attrs: {
-                            dark: "",
-                            label: "Statistics",
-                            value: "Statistics"
-                          },
-                          model: {
-                            value: _vm.selected,
-                            callback: function($$v) {
-                              _vm.selected = $$v
-                            },
-                            expression: "selected"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      { staticClass: "mr-0", attrs: { xs1: "" } },
-                      [
-                        _c("v-checkbox", {
-                          staticClass: "text--white",
-                          attrs: { dark: "", label: "Others", value: "Others" },
-                          model: {
-                            value: _vm.selected,
-                            callback: function($$v) {
-                              _vm.selected = $$v
-                            },
-                            expression: "selected"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      { staticClass: "mt-3", attrs: { xs1: "" } },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: { dark: "", flat: "", small: "" },
-                            on: {
-                              click: function($event) {
-                                $event.stopPropagation()
-                                _vm.showMore = !_vm.showMore
-                              }
-                            }
-                          },
-                          [
-                            _vm._v("Show More"),
-                            _vm.showMore
-                              ? _c("v-icon", { attrs: { dark: "" } }, [
-                                  _vm._v("mdi-chevron-up")
-                                ])
-                              : !_vm.showMore
-                                ? _c("v-icon", { attrs: { dark: "" } }, [
-                                    _vm._v("mdi-chevron-down")
-                                  ])
-                                : _vm._e()
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      { staticClass: "text-xs-right mt-3" },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            staticClass: "ma-0",
-                            class: _vm.buttonClass,
-                            attrs: { depressed: "" },
-                            on: { click: _vm.accept }
-                          },
-                          [_vm._v(_vm._s(_vm.buttonText))]
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm.showMore
-              ? _c(
-                  "v-layout",
-                  { staticClass: "Cookie-show-more px-3", attrs: { row: "" } },
-                  [
-                    _c(
-                      "v-flex",
-                      { staticClass: "px-3" },
-                      [
-                        _c(
-                          "v-tabs",
-                          {
-                            staticClass: "Cookie-tab",
-                            attrs: { dark: "" },
-                            model: {
-                              value: _vm.showMoreTab,
-                              callback: function($$v) {
-                                _vm.showMoreTab = $$v
-                              },
-                              expression: "showMoreTab"
-                            }
-                          },
-                          [
-                            _c(
-                              "v-tab",
-                              {
-                                key: "0",
-                                attrs: {
-                                  "active-class": "Cookie-active-tab",
-                                  ripple: ""
-                                }
-                              },
-                              [_c("strong", [_vm._v("Cookie Declaration")])]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-tab",
-                              {
-                                key: "1",
-                                attrs: {
-                                  "active-class": "Cookie-active-tab",
-                                  ripple: ""
-                                }
-                              },
-                              [_c("strong", [_vm._v("About Cookie")])]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-tab-item",
-                              { key: "0" },
-                              [
-                                _c(
-                                  "v-card",
-                                  {
-                                    staticClass: "d-flex",
-                                    attrs: { flat: "", dark: "" }
-                                  },
-                                  [
-                                    _c(
-                                      "v-flex",
-                                      { attrs: { xs1: "" } },
-                                      [
-                                        _c(
-                                          "v-list",
-                                          {
-                                            staticClass: "pt-0",
-                                            attrs: { dense: "" }
-                                          },
-                                          _vm._l(
-                                            _vm.cookieDecalration,
-                                            function(item) {
-                                              return _c(
-                                                "v-list-tile",
-                                                {
-                                                  key: item,
-                                                  class: {
-                                                    "Cookie-active-tab":
-                                                      _vm.cookieTabClicked ===
-                                                      item
-                                                  },
-                                                  attrs: { ripple: "" },
-                                                  on: {
-                                                    click: function($event) {
-                                                      _vm.cookieTab(item)
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    " " + _vm._s(item) + " "
-                                                  )
-                                                ]
-                                              )
-                                            }
-                                          )
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _vm.cookieTabClicked === "Necessary"
-                                      ? _c(
-                                          "v-flex",
-                                          {
-                                            staticClass:
-                                              "text-xs-left pa-2 caption"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                  These cookies are necessary for the Website to function and cannot be turned off in our systems. They are usually only set in response to actions made by you which amount to a request for information or services, such as logging in or filling in forms on our Website. You can set your browser to block or alert you about these cookies, but some parts of the Website will not then work. These cookies do not store any personally identifiable information.\n                  "
-                                            ),
-                                            _c("div", { staticClass: "py-2" }),
-                                            _vm._v(" "),
-                                            _c("v-data-table", {
-                                              staticClass: "elevation-5",
-                                              attrs: {
-                                                "hide-actions": "",
-                                                headers: _vm.headers,
-                                                items:
-                                                  _vm.cookieLicenceJson
-                                                    .Necessary
-                                              },
-                                              scopedSlots: _vm._u([
-                                                {
-                                                  key: "items",
-                                                  fn: function(props) {
-                                                    return [
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Name
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Provider
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Purpose
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Expiry
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Type
-                                                          )
-                                                        )
-                                                      ])
-                                                    ]
-                                                  }
-                                                }
-                                              ])
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.cookieTabClicked === "Statistics"
-                                      ? _c(
-                                          "v-flex",
-                                          {
-                                            staticClass:
-                                              "text-xs-left pa-2 caption"
-                                          },
-                                          [
-                                            _c("p", [
-                                              _vm._v(
-                                                "\n                    These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other websites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.\n                  "
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("div", { staticClass: "py-2" }),
-                                            _vm._v(" "),
-                                            _c("v-data-table", {
-                                              staticClass: "elevation-5",
-                                              attrs: {
-                                                "hide-actions": "",
-                                                headers: _vm.headers,
-                                                items:
-                                                  _vm.cookieLicenceJson
-                                                    .Statistics
-                                              },
-                                              scopedSlots: _vm._u([
-                                                {
-                                                  key: "items",
-                                                  fn: function(props) {
-                                                    return [
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Name
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Provider
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Purpose
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Expiry
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Type
-                                                          )
-                                                        )
-                                                      ])
-                                                    ]
-                                                  }
-                                                }
-                                              ])
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.cookieTabClicked === "Others"
-                                      ? _c(
-                                          "v-flex",
-                                          {
-                                            staticClass:
-                                              "text-xs-left pa-2 caption"
-                                          },
-                                          [
-                                            _c("p", [
-                                              _vm._v(
-                                                "\n                    Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies.\n                  "
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("div", { staticClass: "py-2" }),
-                                            _vm._v(" "),
-                                            _c("v-data-table", {
-                                              staticClass: "elevation-5",
-                                              attrs: {
-                                                "hide-actions": "",
-                                                headers: _vm.headers,
-                                                items:
-                                                  _vm.cookieLicenceJson
-                                                    .Unclassified
-                                              },
-                                              scopedSlots: _vm._u([
-                                                {
-                                                  key: "items",
-                                                  fn: function(props) {
-                                                    return [
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Name
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Provider
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Purpose
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Expiry
-                                                          )
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("td", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item.Type
-                                                          )
-                                                        )
-                                                      ])
-                                                    ]
-                                                  }
-                                                }
-                                              ])
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e()
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-tab-item",
-                              { key: "1" },
-                              [
-                                _c(
-                                  "v-card",
-                                  { attrs: { flat: "" } },
-                                  [
-                                    _c(
-                                      "v-card-text",
-                                      {
-                                        staticClass: "text-xs-left caption pt-0"
-                                      },
-                                      [
-                                        _c("v-flex", { staticClass: "py-2" }, [
-                                          _c("p", [
-                                            _vm._v(
-                                              "Cookies are small text files that can be used by websites to make a user's experience more efficient."
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("p", [
-                                            _vm._v(
-                                              "The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission."
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("p", [
-                                            _vm._v(
-                                              "This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages."
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("p", [
-                                            _vm._v(
-                                              "You can at any time change or withdraw your consent from the Cookie Declaration on our website."
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("p", [
-                                            _vm._v(
-                                              "Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy."
-                                            )
-                                          ])
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      : _vm._e()
-  ])
-}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"appear":"","name":_vm.transitionName}},[(_vm.isOpen)?_c('div',{staticClass:"Cookie",class:[_vm.containerPosition, _vm.cookieTheme]},[_c('v-layout',{staticClass:"Cookie_header"},[_c('v-flex',{staticClass:"text-xs-left Cookie__content"},[_vm._t("message",[_vm._v(_vm._s(_vm.message))])],2)],1),_vm._v(" "),_c('div',{staticClass:"Cookie_checkbox"},[_c('v-layout',{staticClass:"Cookie__buttons",attrs:{"row":""}},[_c('v-flex',{attrs:{"xs1":""}},[_c('v-checkbox',{staticClass:"text--white",attrs:{"dark":"","disabled":"","label":"Necessary","value":"Necessary"},model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1),_vm._v(" "),_c('v-flex',{attrs:{"xs1":""}},[_c('v-checkbox',{staticClass:"text--white",attrs:{"dark":"","label":"Statistics","value":"Statistics"},model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1),_vm._v(" "),_c('v-flex',{staticClass:"mr-0",attrs:{"xs1":""}},[_c('v-checkbox',{staticClass:"text--white",attrs:{"dark":"","label":"Others","value":"Others"},model:{value:(_vm.selected),callback:function ($$v) {_vm.selected=$$v},expression:"selected"}})],1),_vm._v(" "),_c('v-flex',{staticClass:"mt-3",attrs:{"xs1":""}},[_c('v-btn',{attrs:{"dark":"","flat":"","small":""},on:{"click":function($event){$event.stopPropagation();_vm.showMore = !_vm.showMore}}},[_vm._v("Show More"),(_vm.showMore)?_c('v-icon',{attrs:{"dark":""}},[_vm._v("mdi-chevron-up")]):(!_vm.showMore)?_c('v-icon',{attrs:{"dark":""}},[_vm._v("mdi-chevron-down")]):_vm._e()],1)],1),_vm._v(" "),_c('v-flex',{staticClass:"text-xs-right mt-3"},[_c('v-btn',{staticClass:"ma-0",class:_vm.buttonClass,attrs:{"depressed":""},on:{"click":_vm.accept}},[_vm._v(_vm._s(_vm.buttonText))])],1)],1)],1),_vm._v(" "),(_vm.showMore)?_c('v-layout',{staticClass:"Cookie-show-more px-3",attrs:{"row":""}},[_c('v-flex',{staticClass:"px-3"},[_c('v-tabs',{staticClass:"Cookie-tab",attrs:{"dark":""},model:{value:(_vm.showMoreTab),callback:function ($$v) {_vm.showMoreTab=$$v},expression:"showMoreTab"}},[_c('v-tab',{key:"0",attrs:{"active-class":"Cookie-active-tab","ripple":""}},[_c('strong',[_vm._v("Cookie Declaration")])]),_vm._v(" "),_c('v-tab',{key:"1",attrs:{"active-class":"Cookie-active-tab","ripple":""}},[_c('strong',[_vm._v("About Cookie")])]),_vm._v(" "),_c('v-tab-item',{key:"0"},[_c('v-card',{staticClass:"d-flex",attrs:{"flat":"","dark":""}},[_c('v-flex',{attrs:{"xs1":""}},[_c('v-list',{staticClass:"pt-0",attrs:{"dense":""}},_vm._l((_vm.cookieDecalration),function(item){return _c('v-list-tile',{key:item,class:{'Cookie-active-tab': (_vm.cookieTabClicked === item)},attrs:{"ripple":""},on:{"click":function($event){return _vm.cookieTab(item)}}},[_vm._v(" "+_vm._s(item)+" ")])}),1)],1),_vm._v(" "),(_vm.cookieTabClicked === 'Necessary')?_c('v-flex',{staticClass:"text-xs-left pa-2 caption"},[_vm._v("\n                  These cookies are necessary for the Website to function and cannot be turned off in our systems. They are usually only set in response to actions made by you which amount to a request for information or services, such as logging in or filling in forms on our Website. You can set your browser to block or alert you about these cookies, but some parts of the Website will not then work. These cookies do not store any personally identifiable information.\n                  "),_c('div',{staticClass:"py-2"}),_vm._v(" "),_c('v-data-table',{staticClass:"elevation-5",attrs:{"hide-actions":"","headers":_vm.headers,"items":_vm.cookieLicenceJson.Necessary},scopedSlots:_vm._u([{key:"items",fn:function(props){return [_c('td',[_vm._v(_vm._s(props.item.Name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Provider))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Purpose))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Expiry))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Type))])]}}],null,false,3515277991)})],1):_vm._e(),_vm._v(" "),(_vm.cookieTabClicked === 'Statistics')?_c('v-flex',{staticClass:"text-xs-left pa-2 caption"},[_c('p',[_vm._v("\n                    These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other websites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.\n                  ")]),_vm._v(" "),_c('div',{staticClass:"py-2"}),_vm._v(" "),_c('v-data-table',{staticClass:"elevation-5",attrs:{"hide-actions":"","headers":_vm.headers,"items":_vm.cookieLicenceJson.Statistics},scopedSlots:_vm._u([{key:"items",fn:function(props){return [_c('td',[_vm._v(_vm._s(props.item.Name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Provider))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Purpose))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Expiry))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Type))])]}}],null,false,3515277991)})],1):_vm._e(),_vm._v(" "),(_vm.cookieTabClicked === 'Others')?_c('v-flex',{staticClass:"text-xs-left pa-2 caption"},[_c('p',[_vm._v("\n                    Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies.\n                  ")]),_vm._v(" "),_c('div',{staticClass:"py-2"}),_vm._v(" "),_c('v-data-table',{staticClass:"elevation-5",attrs:{"hide-actions":"","headers":_vm.headers,"items":_vm.cookieLicenceJson.Unclassified},scopedSlots:_vm._u([{key:"items",fn:function(props){return [_c('td',[_vm._v(_vm._s(props.item.Name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Provider))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Purpose))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Expiry))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(props.item.Type))])]}}],null,false,3515277991)})],1):_vm._e()],1)],1),_vm._v(" "),_c('v-tab-item',{key:"1"},[_c('v-card',{attrs:{"flat":""}},[_c('v-card-text',{staticClass:"text-xs-left caption pt-0"},[_c('v-flex',{staticClass:"py-2"},[_c('p',[_vm._v("Cookies are small text files that can be used by websites to make a user's experience more efficient.")]),_vm._v(" "),_c('p',[_vm._v("The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission.")]),_vm._v(" "),_c('p',[_vm._v("This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages.")]),_vm._v(" "),_c('p',[_vm._v("You can at any time change or withdraw your consent from the Cookie Declaration on our website.")]),_vm._v(" "),_c('p',[_vm._v("Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.")])])],1)],1)],1)],1)],1)],1):_vm._e(),_vm._v(" "),_vm._t("default",[_c('div',{staticClass:"Cookie__content"},[_vm._t("message",[_vm._v(_vm._s(_vm.message))])],2),_vm._v(" "),_c('div',{staticClass:"Cookie__buttons"},[(_vm.externalButtonLink)?_c('a',{class:_vm.buttonClass,attrs:{"target":_vm.target,"href":_vm.buttonLink}},[_vm._v(_vm._s(_vm.buttonLinkText))]):_vm._e(),_vm._v(" "),(_vm.internalButtonLink)?_c('router-link',{class:_vm.buttonClass,attrs:{"to":_vm.buttonLink}},[_vm._v(_vm._s(_vm.buttonLinkText))]):_vm._e(),_vm._v(" "),_c('button',{class:_vm.buttonClass,on:{"click":_vm.accept}},[_vm._v(_vm._s(_vm.buttonText))])],1)],{"accept":_vm.accept,"close":_vm.close,"open":_vm.open})],2):_vm._e()])}
 var staticRenderFns = []
-render._withStripped = true
 
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3d45cd9e", { render: render, staticRenderFns: staticRenderFns })
-  }
-}
 
 /***/ }),
-/* 84 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

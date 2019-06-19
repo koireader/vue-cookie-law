@@ -1,45 +1,31 @@
 {
   "Necessary": [{
     "Name": "CookieConsent",
-    "Provider": "www.hollertag.com",
+    "Provider": "www.koireader.com",
     "Purpose": "Stores the user's cookie consent state for the current domain",
     "Expiry": "1 year",
     "Type": "HTTP"
   }],
   "Statistics": [{
       "Name": "_dc_gtm_UA-#  ",
-      "Provider": "www.hollertag.com",
+      "Provider": "www.koireader.com",
       "Purpose": "Used by Google Tag Manager to control the loading of a Google Analytics script tag.",
       "Expiry": "Session",
       "Type": "HTTP"
     },
     {
       "Name": "_ga",
-      "Provider": "www.hollertag.com",
+      "Provider": "www.koireader.com",
       "Purpose": "Registers a unique ID that is used to generate statistical data on how the visitor uses the website.",
       "Expiry": "2 Years",
       "Type": "HTTP"
     },
     {
       "Name": "_gid",
-      "Provider": "www.hollertag.com",
+      "Provider": "www.koireader.com",
       "Purpose": "Registers a unique ID that is used to generate statistical data on how the visitor uses the website.",
       "Expiry": "Session",
       "Type": "HTTP"
-    },
-    {
-      "Name": "fr",
-      "Provider": "facebook.com",
-      "Purpose": "Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.",
-      "Expiry": "3 months",
-      "Type": "HTTP"
-    },
-    {
-      "Name": "tr",
-      "Provider": "facebook.com",
-      "Purpose": "Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers.",
-      "Expiry": "Session",
-      "Type": "Pixel"
     }
   ],
   "Unclassified": [],

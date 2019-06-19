@@ -41,6 +41,27 @@ You can also pass in the message into a named slot. This way you can for example
 </cookie-law>
 ```
 
+## Scoped Slot
+
+For a more complex layout use the scoped slot
+```html
+<cookie-law>
+  <div slot-scope="props">
+    <button class="skew" @click="props.accept"><span>I accept</span></button>
+    <p>
+      This site uses 🍪
+    </p>
+    <button class="skew" @click="props.close"><span>Ignore me</span></button>
+  </div>
+
+</cookie-law>
+```
+| methods | description |
+|---|---|
+| accept | Closes the cookie disclaimer and saves to localStorage |
+| close | Only closes the cookie disclaimer. The disclaimer will reappear on the next page load. |
+| open | Show disclaimer if user ignored him |
+
 ## Props
 | prop | default | type | description
 |---|---|---|---|
@@ -52,7 +73,8 @@ You can also pass in the message into a named slot. This way you can for example
 | message | 'This website uses cookies to ensure you get the best experience on our website.' | String | Your message in the content area
 | theme | 'base' | String | Selected theme. You can also create a custom one
 | position | 'bottom' | String | Possible positions are `bottom` or `top`
-| transitionName | 'slideFromBottom' | String | Enter and leave transitions. Currenty supported `slideFromBottom`, `slideFromTop`, `fade`
+| transitionName | 'slideFromBottom' | String | Enter and leave transitions. Currently supported `slideFromBottom`, `slideFromTop`, `fade`
+| storageType | 'localStorage' | String | Type of storage, where to store 'cookies:accept': true. Can be `localStorage` (default) or `cookies`. If LocalStorage is unsupported, then used Cookies.
 
 ## Events
 
@@ -97,3 +119,5 @@ Please make sure to read the [Contributing Guide](https://github.com/apertureles
 ## :copyright: License
 
 [MIT](http://opensource.org/licenses/MIT)
+
+<a href="https://www.buymeacoffee.com/xcqjaytbl" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>

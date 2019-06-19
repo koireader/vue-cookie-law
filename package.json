@@ -1,6 +1,6 @@
 {
   "name": "vue-cookie-law",
-  "version": "1.6.0",
+  "version": "1.10.0",
   "description": "🍪 👮 EU Cookie Law Plugin for Vue.js",
   "author": "Jakub Juszczak <jakub@posteo.de>",
   "license": "MIT",
@@ -31,15 +31,15 @@
     "docs": "node build/build.js",
     "build": "npm run build:umd",
     "build:es": "rollup -c",
-    "build:umd": "webpack --progress --hide-modules --config  ./build/webpack.release.js",
+    "build:umd": "cross-env NODE_ENV=production webpack --progress --hide-modules --config  ./build/webpack.release.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
     "prepublish": "npm run purge && npm run lint && npm run build"
   },
   "devDependencies": {
-    "@mdi/font": "^2.4.85",
-    "@nextindex/next-scss": "^1.2.0",
+    "@mdi/font": "^3.6.95",
+    "@nextindex/next-scss": "^1.2.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -53,9 +53,9 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
-    "connect-history-api-fallback": "^1.5.0",
+    "connect-history-api-fallback": "^1.6.0",
     "copy-webpack-plugin": "^4.5.1",
-    "cross-env": "^5.1.5",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
@@ -67,13 +67,13 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.16.3",
+    "express": "^4.17.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "function-bind": "^1.1.0",
+    "function-bind": "^1.1.1",
     "html-webpack-plugin": "^3.2.0",
-    "http-proxy-middleware": "^0.18.0",
+    "http-proxy-middleware": "^0.19.1",
     "inject-loader": "^3.0.1",
     "karma": "^1.7.1",
     "karma-coverage": "^1.1.1",
@@ -83,15 +83,15 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "^0.0.32",
     "karma-webpack": "^2.0.9",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.11",
     "lolex": "^1.5.2",
     "mocha": "^4.0.1",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.12.0",
     "opn": "^5.3.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
     "phantomjs-prebuilt": "^2.1.16",
-    "rimraf": "^2.6.2",
+    "rimraf": "^2.6.3",
     "rollup": "^0.42.0",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^8.0.2",
@@ -104,21 +104,21 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "url-loader": "^1.0.1",
-    "vue": "^2.5.16",
+    "vue": "^2.5.17",
     "vue-loader": "^14.2.2",
     "vue-style-loader": "^3.1.2",
-    "vue-template-compiler": "^2.5.16",
-    "vue-test-utils": "^1.0.0-beta.6",
+    "vue-template-compiler": "^2.5.17",
+    "vue-test-utils": "^1.0.0-beta.11",
     "vuetify": "^1.1.1",
     "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "2.11.2",
     "webpack-dev-middleware": "^2.0.6",
-    "webpack-hot-middleware": "^2.22.1",
-    "webpack-merge": "^4.1.2"
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.1"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 10.0.0",
+    "npm": ">= 5.0.0"
   },
   "browserslist": [
     "> 1%",
@@ -126,6 +126,6 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "tiny-cookie": "^2.1.1"
+    "tiny-cookie": "^2.3.1"
   }
 }
