@@ -14,7 +14,7 @@
           <v-flex xs1 class="mr-0"><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
           <v-flex xs1 class="mt-3"><v-btn dark flat small @click.stop="showMore = !showMore">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
           <v-flex class="text-xs-right mt-3">
-            <v-btn depressed :class="buttonClass" @click="accept" class="ma-0">{{ buttonText }}</v-btn>        
+            <v-btn depressed :class="buttonClass" @click="accept" class="ma-0" style="font-weight: bold">{{ buttonText }}</v-btn>        
           </v-flex>
         </v-layout>
       </div>
@@ -101,7 +101,7 @@
             </v-tabs>
           </v-flex>
         </v-layout>
-      <slot :accept="accept" :close="close" :open="open">
+      <!-- <slot :accept="accept" :close="close" :open="open">
         <div class="Cookie__content">
           <slot name="message">{{ message }}</slot>
         </div>
@@ -110,7 +110,7 @@
           <router-link :to="buttonLink" v-if="internalButtonLink" :class="buttonClass">{{ buttonLinkText }}</router-link>
           <button :class="buttonClass" @click="accept">{{ buttonText }}</button>
         </div>
-      </slot>
+      </slot> -->
     </div>
   </transition>
 </template>
