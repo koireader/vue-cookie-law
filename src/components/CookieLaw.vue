@@ -9,11 +9,16 @@
       <div class="Cookie_checkbox">
         <v-layout row class="Cookie__buttons">
           <!-- <div style="border-bottom: 1px solid white; height: 10px; position: absolute; top: 113px; width: 100%;"></div> -->
-          <v-flex xs1><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
-          <v-flex xs1><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
-          <v-flex xs1 class="mr-0"><v-checkbox dark class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex>
-          <v-flex xs1 class="mt-3"><v-btn dark flat small @click.stop="showMore = !showMore">Show More<v-icon dark v-if="showMore">mdi-chevron-up</v-icon><v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon></v-btn></v-flex>
-          <v-flex class="text-xs-right mt-3">
+          <v-flex xs1 id="cookie-necessary"><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
+          <v-flex xs1 id="cookie-statistics"><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
+          <!-- <v-flex xs1 id="cookie-others" class="mr-0"><v-checkbox dark  class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex> -->
+          <v-flex xs1 class="mt14">
+            <v-btn dark flat small @click.stop="showMore = !showMore">Show More
+              <v-icon dark v-if="showMore">mdi-chevron-up</v-icon>
+              <v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex class="text-xs-right mt14">
             <v-btn depressed :class="buttonClass" @click="accept" class="ma-0" style="font-weight: bold">{{ buttonText }}</v-btn>        
           </v-flex>
         </v-layout>
@@ -47,7 +52,6 @@
                         <td>{{ props.item.Type }}</td>
                       </template>
                     </v-data-table>
-
                   </v-flex>
                   <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Statistics'">
                     <p>
@@ -89,11 +93,11 @@
                 <v-card flat>
                   <v-card-text class="text-xs-left caption pt-0">
                     <v-flex class="py-2">
-                      <p>Cookies are small text files that can be used by websites to make a user's experience more efficient.</p>
-                      <p>The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission.</p>
-                      <p>This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages.</p>
-                      <p>You can at any time change or withdraw your consent from the Cookie Declaration on our website.</p>
-                      <p>Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.</p>
+                      <p>Cookies are small text files that can be used by websites to make a user's experience more efficient.<br />
+                      The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission.<br />
+                      This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages.<br />
+                      You can at any time change or withdraw your consent from the Cookie Declaration on our website.<br />
+                      Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.</p>
                     </v-flex>
                   </v-card-text>
                 </v-card>
@@ -130,7 +134,7 @@
     props: {
       buttonText: {
         type: String,
-        default: 'Got it!'
+        default: 'Accept'
       },
       buttonLink: {
         type: [String, Object],
@@ -193,7 +197,7 @@
         showMore: false,
         showMoreTab: 0,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        cookieDecalration: ['Necessary', 'Statistics', 'Others'],
+        cookieDecalration: ['Necessary', 'Statistics'],
         cookieTabClicked: 'Necessary',
         cookieLicenceJson: json,
         headers: [
@@ -203,7 +207,6 @@
           { text: 'Expiry', value: 'expiry' },
           { text: 'Type', value: 'type' }
         ]
-
       }
     },
     mounted () {
@@ -275,6 +278,9 @@
         if (!this.getVisited() === true) {
           this.isOpen = true
         }
+      },
+      cookieTab (item) {
+        this.cookieTabClicked = item
       }
     }
   }
@@ -283,6 +289,10 @@
 <style lang="scss">
 @import "~@nextindex/next-scss/next-scss.scss";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.mt14 {
+  margin-top: 14px;
+}
 
 .Cookie {
   position: fixed;
