@@ -24,8 +24,8 @@
           </v-flex>
         </v-layout>
       </div>
-        <v-layout row v-if="showMore" class="Cookie-show-more px-3">
-          <v-flex class="px-3">
+        <v-layout row v-if="showMore" class="Cookie-show-more">
+          <v-flex>
             <v-tabs class="Cookie-tab" v-model="showMoreTab" dark>
               <v-tab active-class="Cookie-active-tab" key="0" ripple>
                 <strong>Cookie Declaration</strong>
@@ -35,13 +35,17 @@
               </v-tab>
               <v-tab-item key="0">
                 <v-card flat class="d-flex" dark>
-                  <v-flex xs4 md2 lg1>
+                  <v-flex xs3 md2 lg1>
                     <v-list dense class="pt-0" >
                       <v-list-tile v-bind:class="{'Cookie-active-tab': (cookieTabClicked === item)}" v-for="item in cookieDecalration" :key="item" @click="cookieTab(item)" ripple> {{ item }} </v-list-tile>
                     </v-list>
                   </v-flex>
-                  <v-flex class="text-xs-left xs8 md10 lg11 pa-2 caption" v-if="cookieTabClicked === 'Necessary'">
-                    These cookies are necessary for the Website to function and cannot be turned off in our systems. They are usually only set in response to actions made by you which amount to a request for information or services, such as logging in or filling in forms on our Website. You can set your browser to block or alert you about these cookies, but some parts of the Website will not then work. These cookies do not store any personally identifiable information.
+                  <v-flex class="text-xs-left xs9 md10 lg11 pa-2 caption" v-if="cookieTabClicked === 'Necessary'">
+                    These cookies are necessary for the Website to function and cannot be turned off 
+                    in our systems. They are usually only set in response to actions made by you which amount to a 
+                    request for information or services, such as logging in or filling in forms on our Website. 
+                    You can set your browser to block or alert you about these cookies, but some parts of the 
+                    Website will not then work. These cookies do not store any personally identifiable information.
                     <div class="py-2"></div>
                     <v-data-table hide-actions :headers="headers" :items="cookieLicenceJson.Necessary" class="elevation-5">
                       <template slot="items" slot-scope="props">
@@ -54,11 +58,13 @@
                       </template>
                     </v-data-table>
                   </v-flex>
-                  <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Statistics'">
-                    <p>
-                      These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other websites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
-                    </p>
-
+                  <v-flex class="text-xs-left xs9 md10 lg11 pa-2 caption" v-if="cookieTabClicked === 'Statistics'">
+                      These cookies may be set through our site by our advertising partners. 
+                      They may be used by those companies to build a profile of your interests 
+                      and show you relevant adverts on other websites. They do not store directly 
+                      personal information, but are based on uniquely identifying your browser 
+                      and internet device. If you do not allow these cookies, you will experience 
+                      less targeted advertising.
                     <div class="py-2"></div>
                     <v-data-table hide-actions :headers="headers" :items="cookieLicenceJson.Statistics" class="elevation-5">
                       <template slot="items" slot-scope="props">
@@ -71,11 +77,9 @@
                       </template>
                     </v-data-table>
                   </v-flex>
-                  <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Others'">
-                    <p>
-                      Unclassified cookies are cookies that we are in the process of classifying, together with the providers of individual cookies.
-                    </p>
-
+                  <v-flex class="text-xs-left xs9 md10 lg11 pa-2 caption" v-if="cookieTabClicked === 'Others'">
+                      Unclassified cookies are cookies that we are in the process of classifying, 
+                      together with the providers of individual cookies.
                     <div class="py-2"></div>
                     <v-data-table  hide-actions :headers="headers" :items="cookieLicenceJson.Unclassified" class="elevation-5">
                       <template slot="items" slot-scope="props">
@@ -94,11 +98,11 @@
                 <v-card flat>
                   <v-card-text class="text-xs-left caption pt-0">
                     <v-flex class="py-2">
-                      <p>Cookies are small text files that can be used by websites to make a user's experience more efficient.<br />
+                      Cookies are small text files that can be used by websites to make a user's experience more efficient.<br />
                       The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies we need your permission.<br />
                       This site uses different types of cookies. Some cookies are placed by third party services that appear on our pages.<br />
                       You can at any time change or withdraw your consent from the Cookie Declaration on our website.<br />
-                      Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.</p>
+                      Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.
                     </v-flex>
                   </v-card-text>
                 </v-card>
@@ -384,6 +388,8 @@
 .Cookie-show-more {
     position: relative;
     bottom: 10px;
+    max-height: 200px;
+    overflow: auto;
 }
 
 .Cookie-tab .tabs__items {
