@@ -1,6 +1,7 @@
 <template>
   <transition appear :name="transitionName">
     <div class="Cookie" :class="[containerPosition, cookieTheme]" v-if="isOpen">
+      <v-icon small right dark style="position: absolute; top: 10px; right:15px;" @click="closeCookiePop()">close</v-icon>
       <v-layout class="Cookie_header">
         <v-flex class="text-xs-left Cookie__content">
           <slot name="message" class="headline">{{ message }}</slot>
@@ -193,7 +194,7 @@
       return {
         supportsLocalStorage: true,
         isOpen: false,
-        selected: ['Necessary'],
+        selected: ['Necessary', 'Statistics'],
         showMore: false,
         showMoreTab: 0,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -252,6 +253,9 @@
       }
     },
     methods: {
+      closeCookiePop () {
+        this.isOpen = false
+      },
       setVisited () {
         if (this.canUseLocalStorage) {
           localStorage.setItem(this.storageName, true)
@@ -417,19 +421,19 @@
 }
 @include generateTheme("base", #f1f1f1, #232323, #97d058);
 @include generateTheme("base--rounded", #f1f1f1, #232323, #97d058, #fff, 20px);
-@include generateTheme("blood-orange", #424851, #fff, #ad2624);
+@include generateTheme("blood-orange", #424851f5, #fff, #ad2624);
 @include generateTheme(
   "blood-orange--rounded",
-  #424851,
+  #424851f5,
   #fff,
   #e76a68,
   #fff,
   20px
 );
-@include generateTheme("dark-lime", #424851, #fff, #97d058);
+@include generateTheme("dark-lime", #424851f5, #fff, #97d058);
 @include generateTheme(
   "dark-lime--rounded",
-  #424851,
+  #424851f5,
   #fff,
   #97d058,
   #fff,
