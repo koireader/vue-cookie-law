@@ -8,18 +8,18 @@
         </v-flex>
       </v-layout>
       <div class="Cookie_checkbox">
-        <v-layout row class="Cookie__buttons">
+        <v-layout row wrap class="Cookie__buttons">
           <!-- <div style="border-bottom: 1px solid white; height: 10px; position: absolute; top: 113px; width: 100%;"></div> -->
-          <v-flex xs1 id="cookie-necessary"><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
-          <v-flex xs1 id="cookie-statistics"><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
+          <v-flex xs4 md2 id="cookie-necessary"><v-checkbox dark class="text--white" disabled label="Necessary" v-model="selected" value="Necessary"></v-checkbox></v-flex>
+          <v-flex xs4 md2 id="cookie-statistics"><v-checkbox dark class="text--white" label="Statistics" v-model="selected" value="Statistics"></v-checkbox></v-flex>
           <!-- <v-flex xs1 id="cookie-others" class="mr-0"><v-checkbox dark  class="text--white" label="Others" v-model="selected" value="Others"></v-checkbox></v-flex> -->
-          <v-flex xs1 class="mt14">
+          <v-flex xs4 md3 class="mt14">
             <v-btn dark flat small @click.stop="showMore = !showMore">Show More
               <v-icon dark v-if="showMore">mdi-chevron-up</v-icon>
               <v-icon dark v-else-if="!showMore">mdi-chevron-down</v-icon>
             </v-btn>
           </v-flex>
-          <v-flex class="text-xs-right mt14">
+          <v-flex xs12 md5 class="text-xs-right mt14">
             <v-btn depressed :class="buttonClass" @click="accept" class="ma-0" style="font-weight: bold">{{ buttonText }}</v-btn>        
           </v-flex>
         </v-layout>
@@ -35,12 +35,12 @@
               </v-tab>
               <v-tab-item key="0">
                 <v-card flat class="d-flex" dark>
-                  <v-flex xs1>
+                  <v-flex xs4 md2 lg1>
                     <v-list dense class="pt-0" >
                       <v-list-tile v-bind:class="{'Cookie-active-tab': (cookieTabClicked === item)}" v-for="item in cookieDecalration" :key="item" @click="cookieTab(item)" ripple> {{ item }} </v-list-tile>
                     </v-list>
                   </v-flex>
-                  <v-flex class="text-xs-left pa-2 caption" v-if="cookieTabClicked === 'Necessary'">
+                  <v-flex class="text-xs-left xs8 md10 lg11 pa-2 caption" v-if="cookieTabClicked === 'Necessary'">
                     These cookies are necessary for the Website to function and cannot be turned off in our systems. They are usually only set in response to actions made by you which amount to a request for information or services, such as logging in or filling in forms on our Website. You can set your browser to block or alert you about these cookies, but some parts of the Website will not then work. These cookies do not store any personally identifiable information.
                     <div class="py-2"></div>
                     <v-data-table hide-actions :headers="headers" :items="cookieLicenceJson.Necessary" class="elevation-5">
