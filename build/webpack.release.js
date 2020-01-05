@@ -51,7 +51,7 @@ module.exports = {
       ]
     },
 
-    plugins: [
-        new webpack.BannerPlugin(banner)
-    ]
+    // plugins: [
+    //     new webpack.BannerPlugin(banner)
+    // ]
 }

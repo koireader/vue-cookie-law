@@ -1,8 +1,3 @@
-/*!
- * vue-cookie-law v1.10.0
- * (c) 2019 Jakub Juszczak <jakub@posteo.de>
- * 
- */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
